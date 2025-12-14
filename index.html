@@ -4,22 +4,21 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  <title>Sakib Shaukat — Data / BI Portfolio</title>
-  <meta name="description" content="Sakib Shaukat — Data Science (M.Sc.) portfolio featuring Tableau dashboards, analytics projects, and applied ML work." />
+  <title>Sakib Shaukat — Data Scientist / Data Analyst</title>
+  <meta name="description" content="Sakib Shaukat — Data Scientist / Data Analyst portfolio. Featured analytics case studies, Tableau dashboards, and applied ML projects." />
 
-  <!-- Open Graph (optional but nice for sharing) -->
-  <meta property="og:title" content="Sakib Shaukat — Data / BI Portfolio" />
-  <meta property="og:description" content="Tableau dashboards, analytics case studies, and applied ML projects." />
+  <!-- Open Graph (nice for sharing on LinkedIn) -->
+  <meta property="og:title" content="Sakib Shaukat — Data Scientist / Data Analyst" />
+  <meta property="og:description" content="Analytics case studies, Tableau dashboards, and applied ML projects." />
   <meta property="og:type" content="website" />
-  <!-- Put a social preview image in your repo and update the URL below if you want -->
-  <!-- <meta property="og:image" content="https://YOURUSERNAME.github.io/assets/og.png" /> -->
+  <!-- Optional: add an image at assets/og.png and uncomment the next line (update URL to your Pages site) -->
+  <!-- <meta property="og:image" content="https://sak-ib.github.io/assets/og.png" /> -->
 
   <style>
     :root{
       --bg: #0b1220;
       --bg2:#0b1220;
       --card:#0f1b33;
-      --card2:#0c172d;
       --text:#eaf0ff;
       --muted:#b6c2e0;
       --line: rgba(255,255,255,0.10);
@@ -28,21 +27,19 @@
       --shadow: 0 18px 40px rgba(0,0,0,0.35);
       --radius: 18px;
       --radius2: 26px;
-      --max: 1100px;
+      --max: 1120px;
     }
 
-    /* Light mode */
     [data-theme="light"]{
       --bg: #ffffff;
       --bg2: #f6f8ff;
       --card:#ffffff;
-      --card2:#ffffff;
-      --text:#111827;
-      --muted:#4b5563;
-      --line: rgba(17,24,39,0.10);
+      --text:#0b1020;
+      --muted:#44506a;
+      --line: rgba(11,16,32,0.10);
       --accent:#295bff;
       --accent2:#0ea5e9;
-      --shadow: 0 16px 36px rgba(17,24,39,0.10);
+      --shadow: 0 16px 36px rgba(11,16,32,0.10);
     }
 
     *{ box-sizing:border-box; }
@@ -79,7 +76,7 @@
       backdrop-filter: blur(10px);
     }
     [data-theme="light"] .topbar{ background: rgba(255,255,255,0.70); }
-    .brand{ display:flex; align-items:center; gap:10px; min-width:220px; }
+    .brand{ display:flex; align-items:center; gap:10px; min-width:240px; }
     .dot{
       width:10px; height:10px; border-radius:999px;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
@@ -94,7 +91,7 @@
       background: rgba(255,255,255,0.03);
       font-size:14px; color:var(--muted);
     }
-    [data-theme="light"] .pill{ background: rgba(17,24,39,0.03); }
+    [data-theme="light"] .pill{ background: rgba(11,16,32,0.03); }
     .pill:hover{ text-decoration:none; border-color: rgba(122,162,255,0.45); color: var(--text); }
 
     .actions{ display:flex; gap:10px; align-items:center; justify-content:flex-end; }
@@ -105,7 +102,7 @@
       background: rgba(255,255,255,0.03);
       font-size:14px;
     }
-    [data-theme="light"] .btn{ background: rgba(17,24,39,0.03); }
+    [data-theme="light"] .btn{ background: rgba(11,16,32,0.03); }
     .btn:hover{ text-decoration:none; border-color: rgba(122,162,255,0.55); }
     .btnPrimary{
       border-color: transparent;
@@ -151,7 +148,7 @@
       margin:0;
       color: var(--muted);
       font-size: 16px;
-      max-width: 64ch;
+      max-width: 70ch;
     }
     .badges{ display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
     .badge{
@@ -162,16 +159,12 @@
       color: var(--muted);
       font-size: 14px;
     }
-    [data-theme="light"] .badge{ background: rgba(17,24,39,0.03); }
+    [data-theme="light"] .badge{ background: rgba(11,16,32,0.03); }
     .badge b{ color: var(--text); font-weight:650; }
-
     .cta{ display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; }
 
-    /* Photo card */
-    .photoWrap{
-      height: 100%;
-      display:flex; flex-direction:column;
-    }
+    /* Photo */
+    .photoWrap{ height: 100%; display:flex; flex-direction:column; }
     .photoTop{
       display:flex; align-items:center; justify-content:space-between; gap:10px;
       padding:18px 18px 0;
@@ -186,10 +179,7 @@
       background: rgba(255,255,255,0.04);
       box-shadow: 0 18px 40px rgba(0,0,0,0.25);
     }
-    .photo img{
-      width:100%; height:100%; object-fit:cover; display:block;
-      transform: translateZ(0);
-    }
+    .photo img{ width:100%; height:100%; object-fit:cover; display:block; }
     .photoNote{
       padding: 0 18px 18px;
       color: var(--muted);
@@ -206,11 +196,7 @@
       display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap;
       margin: 0 0 12px;
     }
-    h2{
-      margin:0;
-      font-size: 20px;
-      letter-spacing:-0.2px;
-    }
+    h2{ margin:0; font-size: 20px; letter-spacing:-0.2px; }
     .hint{ color:var(--muted); font-size:14px; margin:0; }
 
     /* Projects grid */
@@ -227,10 +213,11 @@
       background: rgba(255,255,255,0.02);
       overflow:hidden;
     }
-    [data-theme="light"] .proj{ background: rgba(17,24,39,0.02); }
+    [data-theme="light"] .proj{ background: rgba(11,16,32,0.02); }
     .proj .inner{ padding: 16px; }
     .proj h3{ margin:0 0 6px; font-size: 17px; letter-spacing:-0.2px; }
     .proj p{ margin:0; color: var(--muted); font-size:14px; }
+
     .tags{ display:flex; gap:8px; flex-wrap:wrap; margin-top: 12px; }
     .tag{
       padding: 6px 10px; border-radius: 999px;
@@ -239,9 +226,8 @@
       font-size: 13px;
       background: rgba(255,255,255,0.02);
     }
-    .links{
-      display:flex; gap:10px; flex-wrap:wrap; margin-top: 12px;
-    }
+
+    .links{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 12px; }
     .links a{
       padding:8px 10px; border-radius: 12px; border: 1px solid var(--line);
       font-size: 13px; color: var(--text);
@@ -249,7 +235,7 @@
     }
     .links a:hover{ text-decoration:none; border-color: rgba(122,162,255,0.55); }
 
-    /* Two-column content blocks */
+    /* Two-column panels */
     .twoCol{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -263,7 +249,7 @@
       background: rgba(255,255,255,0.02);
       padding: 16px;
     }
-    [data-theme="light"] .panel{ background: rgba(17,24,39,0.02); }
+    [data-theme="light"] .panel{ background: rgba(11,16,32,0.02); }
     .panel h3{ margin:0 0 8px; font-size: 16px; }
     .panel ul{ margin:0; padding-left: 18px; color: var(--muted); }
     .panel li{ margin:8px 0; }
@@ -276,9 +262,8 @@
       font-size: 13px; color: var(--muted);
       background: rgba(255,255,255,0.02);
     }
-    [data-theme="light"] .chip{ background: rgba(17,24,39,0.02); }
+    [data-theme="light"] .chip{ background: rgba(11,16,32,0.02); }
 
-    /* Footer */
     footer{
       margin-top: 34px;
       padding-top: 16px;
@@ -287,14 +272,9 @@
       display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between;
       font-size: 14px;
     }
-
-    @media (prefers-reduced-motion: reduce){
-      html{ scroll-behavior:auto; }
-    }
   </style>
 
   <script>
-    // Theme: remembers your choice
     (function(){
       const saved = localStorage.getItem("theme");
       const prefersLight = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
@@ -303,18 +283,18 @@
     })();
   </script>
 
-  <!-- Structured data (optional) -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"Person",
     "name":"Sakib Shaukat",
-    "jobTitle":"Data Analyst / BI / Data Science",
+    "jobTitle":"Data Scientist / Data Analyst",
     "email":"mailto:17shaukat@gmail.com",
     "telephone":"+49 162 4042942",
     "address":{"@type":"PostalAddress","addressLocality":"Hamburg","addressCountry":"DE"},
     "sameAs":[
-      "https://www.linkedin.com/in/sakib-shaukat/"
+      "https://www.linkedin.com/in/sakib-shaukat/",
+      "https://github.com/sak-ib"
     ]
   }
   </script>
@@ -330,7 +310,7 @@
         <span class="dot" aria-hidden="true"></span>
         <div>
           <strong>Sakib Shaukat</strong><br />
-          <span style="color:var(--muted); font-size:13px;">Data / BI • SQL • Python • Tableau</span>
+          <span style="color:var(--muted); font-size:13px;">Data Scientist / Data Analyst • SQL • Python • Tableau</span>
         </div>
       </div>
 
@@ -351,9 +331,7 @@
           Theme
         </button>
 
-        <!-- Put resume.pdf in the repo root and this will work -->
         <a class="btn" href="resume.pdf">Resume</a>
-
         <a class="btn btnPrimary" href="#projects" aria-label="Jump to projects">View work</a>
       </div>
     </div>
@@ -362,16 +340,16 @@
     <div class="hero" id="main">
       <div class="card">
         <div class="cardInner">
-          <h1>Data & BI Portfolio</h1>
+          <h1>Portfolio</h1>
           <p class="subtitle">
-            I build analytics products end-to-end: data prep (SQL/Python) → modeling/analysis → clear Tableau dashboards and case studies.
-            Currently based in <b>Hamburg, Germany</b>.
+            I build data products end-to-end: <b>clean data (SQL/Python)</b> → <b>analysis & modeling</b> →
+            <b>clear dashboards and case studies</b>. My work focuses on turning messy data into decisions.
           </p>
 
           <div class="badges" aria-label="Highlights">
-            <span class="badge"><b>Experience</b> ~3 years (industry + research)</span>
-            <span class="badge"><b>Focus</b> Analytics • ML • Dashboards</span>
-            <span class="badge"><b>Languages</b> English (C1) • German (B2–C1)</span>
+            <span class="badge"><b>Roles</b> Data Scientist • Data Analyst</span>
+            <span class="badge"><b>Strengths</b> Analytics • ML • Storytelling</span>
+            <span class="badge"><b>Location</b> Hamburg, Germany</span>
           </div>
 
           <div class="cta">
@@ -383,7 +361,7 @@
               Email
             </a>
             <a class="btn" href="https://www.linkedin.com/in/sakib-shaukat/" target="_blank" rel="noreferrer">LinkedIn</a>
-            <a class="btn" href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="btn" href="https://github.com/sak-ib" target="_blank" rel="noreferrer">GitHub</a>
             <a class="btn" href="tel:+491624042942">+49 162 4042942</a>
           </div>
         </div>
@@ -393,13 +371,12 @@
         <div class="photoTop">
           <div>
             <div style="font-weight:650;">Profile</div>
-            <div class="mini">Photo + quick context</div>
+            <div class="mini">Data Scientist / Data Analyst</div>
           </div>
           <span class="pill" style="cursor:default;">Open to roles</span>
         </div>
 
         <div class="photo" aria-label="Sakib photo">
-          <!-- Add your photo file to: assets/profile.jpg (and optional assets/profile.webp) -->
           <picture>
             <source srcset="assets/profile.webp" type="image/webp">
             <img src="assets/profile.jpg" alt="Photo of Sakib Shaukat" />
@@ -408,7 +385,7 @@
 
         <div class="photoNote">
           Add your image file in your repo:
-          <br /><code>assets/profile.jpg</code> (recommended: square image, 800×800 or higher).
+          <br /><code>assets/profile.jpg</code> (square crop recommended, 800×800+).
         </div>
       </div>
     </div>
@@ -417,18 +394,18 @@
     <section id="projects">
       <div class="sectionTitle">
         <h2>Featured projects</h2>
-        <p class="hint">Keep these as 4 strong case studies (dashboard + repo + short write-up).</p>
+        <p class="hint">4 case studies. Each should have: problem → approach → results → links.</p>
       </div>
 
       <div class="grid">
         <!-- Project 1 -->
         <article class="proj">
           <div class="inner">
-            <h3>Project 1 — KPI / Sales Dashboard</h3>
-            <p>Interactive Tableau dashboard: KPIs, time trends, category breakdown, and filters. (Replace with your final story.)</p>
+            <h3>Project 1 — Business KPI Dashboard</h3>
+            <p>Interactive Tableau dashboard to track KPIs, trends, segment performance, and drivers. (Replace with your final story.)</p>
             <div class="tags">
               <span class="tag">Tableau</span>
-              <span class="tag">Data cleaning</span>
+              <span class="tag">Data prep</span>
               <span class="tag">Dashboard design</span>
             </div>
             <div class="links">
@@ -442,15 +419,15 @@
         <!-- Project 2 -->
         <article class="proj">
           <div class="inner">
-            <h3>Project 2 — Cohort Retention Analysis</h3>
-            <p>Cohort table + retention curves with insights and recommendations. (Replace with your dataset and findings.)</p>
+            <h3>Project 2 — Cohort Retention & Churn</h3>
+            <p>Cohort table + retention curves with insights and recommendations. (Replace with your dataset + key findings.)</p>
             <div class="tags">
               <span class="tag">SQL</span>
               <span class="tag">Python</span>
               <span class="tag">Analytics</span>
             </div>
             <div class="links">
-              <a href="PASTE_DASHBOARD_OR_NOTEBOOK">Notebook / Dashboard</a>
+              <a href="PASTE_NOTEBOOK_OR_DASHBOARD">Notebook / Dashboard</a>
               <a href="PASTE_REPO_LINK">GitHub repo</a>
               <a href="PASTE_WRITEUP_LINK">Case study</a>
             </div>
@@ -460,12 +437,12 @@
         <!-- Project 3 -->
         <article class="proj">
           <div class="inner">
-            <h3>Project 3 — Operations / Monitoring</h3>
-            <p>Monitoring view with trends, anomalies, and operational KPIs. (Replace with your domain: energy/industrial/etc.)</p>
+            <h3>Project 3 — Time Series Monitoring</h3>
+            <p>Operational monitoring with trends, anomalies, and performance KPIs. (Replace with your domain: energy/industrial/etc.)</p>
             <div class="tags">
-              <span class="tag">Tableau</span>
               <span class="tag">Time series</span>
               <span class="tag">KPIs</span>
+              <span class="tag">Visualization</span>
             </div>
             <div class="links">
               <a href="PASTE_TABLEAU_LINK">Live dashboard</a>
@@ -478,12 +455,12 @@
         <!-- Project 4 -->
         <article class="proj">
           <div class="inner">
-            <h3>Project 4 — Applied ML (Computer Vision / Forecasting)</h3>
-            <p>Applied ML work with clear evaluation, explainability, and practical takeaways. (Replace with your strongest ML project.)</p>
+            <h3>Project 4 — Applied ML Case Study</h3>
+            <p>End-to-end modeling: features → training → evaluation → explainability → practical takeaway. (Replace with your strongest ML work.)</p>
             <div class="tags">
-              <span class="tag">Python</span>
-              <span class="tag">ML</span>
-              <span class="tag">SHAP / Explainability</span>
+              <span class="tag">Machine Learning</span>
+              <span class="tag">Evaluation</span>
+              <span class="tag">Explainability</span>
             </div>
             <div class="links">
               <a href="PASTE_DEMO_LINK">Demo</a>
@@ -508,7 +485,8 @@
           <li>On Tableau Public: open your viz → Share → copy <b>Embed Code</b>.</li>
           <li>Paste the embed snippet below (replace this panel contents).</li>
         </ul>
-        <!-- Placeholder: paste Tableau embed code here -->
+
+        <!-- Paste Tableau embed code here -->
         <!--
         <div style="margin-top:12px;">
           ... Tableau embed snippet ...
@@ -517,28 +495,29 @@
       </div>
     </section>
 
-    <!-- About / Experience -->
+    <!-- About -->
     <section id="about">
       <div class="sectionTitle">
         <h2>About</h2>
-        <p class="hint">Short and credible (not a full CV). Resume stays as a link.</p>
+        <p class="hint">Short, credible, and focused on how you work.</p>
       </div>
 
       <div class="twoCol">
         <div class="panel">
-          <h3>Summary</h3>
+          <h3>What I do</h3>
           <ul>
-            <li>Data Science M.Sc. (near completion) with practical analytics + ML experience.</li>
-            <li>Comfortable delivering end-to-end: data prep → modeling/analysis → dashboards.</li>
-            <li>Interested in industrial/energy analytics, time series, and applied computer vision.</li>
+            <li>Frame problems with clear metrics and assumptions.</li>
+            <li>Build reliable pipelines for analysis (SQL/Python) and reproducible notebooks.</li>
+            <li>Deliver results through dashboards + concise narratives, not just code.</li>
           </ul>
         </div>
 
         <div class="panel">
-          <h3>Experience highlights</h3>
+          <h3>What I’m looking for</h3>
           <ul>
-            <li><b>Fraunhofer IEG</b> — Research Assistant (Mar 2024 – Present): ML + optimization, ETL, dashboards.</li>
-            <li><b>TCS Research</b> — Systems Engineer (Sep 2021 – Mar 2023): CV pipelines for sports video event detection.</li>
+            <li>Data Scientist (Applied) — modeling + evaluation + business context.</li>
+            <li>Data Analyst — metrics, experimentation, dashboards, stakeholder communication.</li>
+            <li>Domains: industrial/energy analytics, time series, applied computer vision.</li>
           </ul>
         </div>
       </div>
@@ -548,44 +527,65 @@
     <section id="skills">
       <div class="sectionTitle">
         <h2>Skills</h2>
-        <p class="hint">Tools recruiters expect to see at a glance.</p>
+        <p class="hint">Tools and methods I use regularly.</p>
       </div>
 
       <div class="twoCol">
         <div class="panel">
-          <h3>Core</h3>
+          <h3>Analytics</h3>
           <div class="chips">
             <span class="chip">SQL</span>
             <span class="chip">Python</span>
-            <span class="chip">Tableau</span>
-            <span class="chip">Power BI</span>
-            <span class="chip">ETL</span>
-            <span class="chip">Data modeling</span>
-            <span class="chip">Data visualization</span>
+            <span class="chip">EDA</span>
+            <span class="chip">Feature engineering</span>
+            <span class="chip">Visualization</span>
+            <span class="chip">Dashboarding (Tableau)</span>
           </div>
         </div>
 
         <div class="panel">
-          <h3>ML / Platforms</h3>
+          <h3>Data Science</h3>
           <div class="chips">
             <span class="chip">scikit-learn</span>
             <span class="chip">TensorFlow / Keras</span>
             <span class="chip">PyTorch</span>
-            <span class="chip">SHAP</span>
+            <span class="chip">Model evaluation</span>
+            <span class="chip">Explainability (SHAP)</span>
+            <span class="chip">Time series</span>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Data & Platforms</h3>
+          <div class="chips">
             <span class="chip">BigQuery</span>
             <span class="chip">Snowflake</span>
+            <span class="chip">ETL</span>
             <span class="chip">Git</span>
             <span class="chip">Linux</span>
+            <span class="chip">Excel</span>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Communication</h3>
+          <div class="chips">
+            <span class="chip">Stakeholder-friendly storytelling</span>
+            <span class="chip">Clear documentation</span>
+            <span class="chip">Reproducible workflows</span>
+            <span class="chip">English (C1)</span>
+            <span class="chip">German (B2–C1)</span>
           </div>
         </div>
       </div>
     </section>
 
     <footer>
-      <div>© <span id="year"></span> Sakib Shaukat · Built on GitHub Pages</div>
+      <div>© <span id="year"></span> Sakib Shaukat · Built with GitHub Pages</div>
       <div>
         <a class="pill" href="mailto:17shaukat@gmail.com">17shaukat@gmail.com</a>
         <a class="pill" href="https://www.linkedin.com/in/sakib-shaukat/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a class="pill" href="https://github.com/sak-ib" target="_blank" rel="noreferrer">GitHub</a>
       </div>
     </footer>
   </div>
@@ -593,7 +593,6 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Toggle theme
     document.getElementById("themeBtn").addEventListener("click", function(){
       const cur = document.documentElement.getAttribute("data-theme") || "dark";
       const next = cur === "dark" ? "light" : "dark";
