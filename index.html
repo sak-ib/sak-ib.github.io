@@ -11,6 +11,11 @@
   <meta property="og:description" content="Analytics case studies, Tableau dashboards, and applied ML projects." />
   <meta property="og:type" content="website" />
 
+  <!-- Typography: premium, modern sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
     /* =========================
        Theme tokens
@@ -22,6 +27,18 @@
 
       --dur: 240ms;
       --ease: cubic-bezier(.2,.8,.2,1);
+
+      /* Type */
+      --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+      /* Responsive type scale */
+      --fs-body: clamp(15.5px, 0.95vw, 17px);
+      --fs-small: clamp(12.5px, 0.75vw, 13.5px);
+      --fs-h1: clamp(40px, 4.2vw, 56px);
+      --fs-h2: clamp(18px, 1.6vw, 22px);
+      --fs-h3: clamp(16px, 1.25vw, 18px);
+      --fs-subtitle: clamp(15.5px, 1.1vw, 18px);
 
       /* Light default */
       --bg0:#f7f9ff;
@@ -83,7 +100,12 @@
     html{ scroll-behavior:smooth; }
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      font-family: var(--font-sans);
+      font-size: var(--fs-body);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+
       color: var(--text);
       background:
         radial-gradient(900px 520px at 15% -10%, var(--heroGlow1), transparent 55%),
@@ -145,8 +167,11 @@
     }
     html[data-theme="dark"] .dot{ box-shadow: 0 0 0 6px rgba(122,162,255,0.14); }
 
-    .brand strong{ letter-spacing:-0.2px; }
-    .brand small{ color: var(--muted); font-size:13px; }
+    .brand strong{
+      letter-spacing:-0.35px;
+      font-weight: 800;
+    }
+    .brand small{ color: var(--muted); font-size: var(--fs-small); font-weight: 600; }
 
     .nav{ display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
     .pill{
@@ -154,7 +179,9 @@
       border:1px solid var(--line);
       border-radius:999px;
       background: var(--pillBg);
-      font-size:14px;
+      font-size: var(--fs-small);
+      font-weight: 600;
+      letter-spacing: -0.1px;
       color: var(--muted);
       transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease), background var(--dur) var(--ease), color var(--dur) var(--ease);
     }
@@ -175,7 +202,9 @@
       border-radius: 14px;
       border: 1px solid var(--line);
       background: var(--pillBg);
-      font-size:14px;
+      font-size: var(--fs-small);
+      font-weight: 600;
+      letter-spacing: -0.1px;
       transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease), background var(--dur) var(--ease);
       cursor:pointer;
     }
@@ -187,12 +216,13 @@
       transform: translateY(-1px);
     }
     html[data-theme="dark"] .btn:hover{ border-color: rgba(122,162,255,0.45); }
+    html[data-theme="dark"] .btn svg{ stroke: currentColor; }
 
     .btnPrimary{
       border-color: transparent;
       background: linear-gradient(135deg, rgba(41,91,255,0.95), rgba(14,165,233,0.85));
       color: #ffffff;
-      font-weight: 650;
+      font-weight: 700;
       box-shadow: 0 14px 30px rgba(41,91,255,0.18);
     }
     html[data-theme="dark"] .btnPrimary{
@@ -234,14 +264,16 @@
 
     h1{
       margin: 0 0 10px;
-      font-size: 42px;
-      letter-spacing:-0.8px;
-      line-height:1.05;
+      font-size: var(--fs-h1);
+      font-weight: 800;
+      letter-spacing:-0.9px;
+      line-height:1.03;
     }
     .subtitle{
       margin:0;
       color: var(--muted);
-      font-size: 16px;
+      font-size: var(--fs-subtitle);
+      line-height: 1.55;
       max-width: 78ch;
     }
 
@@ -253,10 +285,12 @@
       border:1px solid var(--line);
       background: rgba(255,255,255,0.75);
       color: var(--muted);
-      font-size: 14px;
+      font-size: var(--fs-small);
+      font-weight: 600;
+      letter-spacing: -0.1px;
     }
     html[data-theme="dark"] .badge{ background: rgba(255,255,255,0.06); }
-    .badge b{ color: var(--text); font-weight:650; }
+    .badge b{ color: var(--text); font-weight:700; }
 
     .cta{ display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; }
 
@@ -265,7 +299,7 @@
       display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
       padding:18px 18px 0;
     }
-    .mini{ color: var(--muted); font-size:14px; }
+    .mini{ color: var(--muted); font-size: var(--fs-small); font-weight: 600; }
 
     .photo{
       margin: 14px auto 12px;
@@ -312,8 +346,8 @@
       background: rgba(255,255,255,0.05);
     }
     .block:hover{ transform: translateY(-2px); }
-    .block b{ display:block; font-size:13px; letter-spacing:-0.2px; }
-    .block span{ color: var(--muted); font-size:13px; }
+    .block b{ display:block; font-size: var(--fs-small); font-weight: 800; letter-spacing:-0.2px; }
+    .block span{ color: var(--muted); font-size: var(--fs-small); }
 
     .block.b1{ border-color: rgba(41,91,255,0.22); background: linear-gradient(180deg, rgba(41,91,255,0.08), rgba(255,255,255,0.75)); }
     .block.b2{ border-color: rgba(14,165,233,0.22); background: linear-gradient(180deg, rgba(14,165,233,0.10), rgba(255,255,255,0.75)); }
@@ -332,8 +366,13 @@
       gap:12px; flex-wrap:wrap;
       margin: 0 0 12px;
     }
-    h2{ margin:0; font-size: 20px; letter-spacing:-0.2px; }
-    .hint{ margin:0; color:var(--muted); font-size:14px; }
+    h2{
+      margin:0;
+      font-size: var(--fs-h2);
+      font-weight: 750;
+      letter-spacing:-0.35px;
+    }
+    .hint{ margin:0; color:var(--muted); font-size: var(--fs-small); }
 
     /* =========================
        Projects grid
@@ -362,15 +401,21 @@
     html[data-theme="dark"] .proj:hover{ border-color: rgba(122,162,255,0.35); }
 
     .proj .inner{ padding: 16px; }
-    .proj h3{ margin:0 0 6px; font-size: 17px; letter-spacing:-0.2px; }
-    .proj p{ margin:0; color: var(--muted); font-size:14px; }
+    .proj h3{
+      margin:0 0 6px;
+      font-size: var(--fs-h3);
+      font-weight: 750;
+      letter-spacing:-0.25px;
+    }
+    .proj p{ margin:0; color: var(--muted); font-size: var(--fs-body); }
 
     .tags{ display:flex; gap:8px; flex-wrap:wrap; margin-top: 12px; }
     .tag{
       padding: 6px 10px;
       border-radius: 999px;
       border:1px solid var(--line);
-      font-size: 13px;
+      font-size: var(--fs-small);
+      font-weight: 600;
       color: var(--text);
       background: rgba(41,91,255,0.07);
     }
@@ -387,7 +432,8 @@
       padding:8px 10px;
       border-radius: 12px;
       border: 1px solid var(--linkBorder);
-      font-size: 13px;
+      font-size: var(--fs-small);
+      font-weight: 650;
       color: var(--linkText);
       background: var(--linkBg);
       transition: transform var(--dur) var(--ease), background var(--dur) var(--ease), border-color var(--dur) var(--ease);
@@ -421,8 +467,13 @@
       padding: 16px;
     }
     html[data-theme="dark"] .panel{ background: rgba(255,255,255,0.05); }
-    .panel h3{ margin:0 0 8px; font-size: 16px; }
-    .panel ul{ margin:0; padding-left: 18px; color: var(--muted); }
+    .panel h3{
+      margin:0 0 8px;
+      font-size: var(--fs-h3);
+      font-weight: 750;
+      letter-spacing:-0.2px;
+    }
+    .panel ul{ margin:0; padding-left: 18px; color: var(--muted); font-size: var(--fs-body); }
     .panel li{ margin:8px 0; }
 
     .chips{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px; }
@@ -430,7 +481,8 @@
       padding: 7px 10px;
       border-radius: 999px;
       border:1px solid var(--line);
-      font-size: 13px;
+      font-size: var(--fs-small);
+      font-weight: 600;
       color: var(--muted);
       background: var(--pillBg);
     }
@@ -458,7 +510,8 @@
       border-top: 1px solid var(--line);
       color: var(--muted);
       display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between;
-      font-size: 14px;
+      font-size: var(--fs-small);
+      font-weight: 600;
     }
 
     @media (prefers-reduced-motion: reduce){
@@ -467,6 +520,22 @@
       .reveal{ opacity:1; transform:none; }
     }
   </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Sakib Shaukat",
+    "jobTitle":"Data Scientist / Data Analyst",
+    "email":"mailto:17shaukat@gmail.com",
+    "telephone":"+49 162 4042942",
+    "address":{"@type":"PostalAddress","addressLocality":"Hamburg","addressCountry":"DE"},
+    "sameAs":[
+      "https://www.linkedin.com/in/sakib-shaukat/",
+      "https://github.com/sak-ib"
+    ]
+  }
+  </script>
 </head>
 
 <body>
@@ -566,7 +635,7 @@
           <div class="card reveal" aria-label="Profile photo and quick facts">
             <div class="profileTop">
               <div>
-                <div style="font-weight:650;">Profile</div>
+                <div style="font-weight:800;">Profile</div>
                 <div class="mini">Data Scientist / Data Analyst</div>
               </div>
               <span class="pill" style="cursor:default;">Open to roles</span>
