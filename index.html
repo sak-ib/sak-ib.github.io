@@ -3,328 +3,603 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Sakib Shaukat — Data Science (M.Sc.) portfolio: projects, dashboards, and experience in ML, analytics, SQL, and BI." />
+
   <title>Sakib Shaukat — Data / BI Portfolio</title>
+  <meta name="description" content="Sakib Shaukat — Data Science (M.Sc.) portfolio featuring Tableau dashboards, analytics projects, and applied ML work." />
+
+  <!-- Open Graph (optional but nice for sharing) -->
+  <meta property="og:title" content="Sakib Shaukat — Data / BI Portfolio" />
+  <meta property="og:description" content="Tableau dashboards, analytics case studies, and applied ML projects." />
+  <meta property="og:type" content="website" />
+  <!-- Put a social preview image in your repo and update the URL below if you want -->
+  <!-- <meta property="og:image" content="https://YOURUSERNAME.github.io/assets/og.png" /> -->
 
   <style>
     :root{
-      --bg:#ffffff;
-      --text:#111;
-      --muted:#555;
-      --line:#e9e9e9;
-      --card:#fafafa;
-      --chip:#f3f3f3;
+      --bg: #0b1220;
+      --bg2:#0b1220;
+      --card:#0f1b33;
+      --card2:#0c172d;
+      --text:#eaf0ff;
+      --muted:#b6c2e0;
+      --line: rgba(255,255,255,0.10);
+      --accent:#7aa2ff;
+      --accent2:#9be3ff;
+      --shadow: 0 18px 40px rgba(0,0,0,0.35);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1100px;
     }
-    *{box-sizing:border-box}
+
+    /* Light mode */
+    [data-theme="light"]{
+      --bg: #ffffff;
+      --bg2: #f6f8ff;
+      --card:#ffffff;
+      --card2:#ffffff;
+      --text:#111827;
+      --muted:#4b5563;
+      --line: rgba(17,24,39,0.10);
+      --accent:#295bff;
+      --accent2:#0ea5e9;
+      --shadow: 0 16px 36px rgba(17,24,39,0.10);
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
     body{
-      margin:0; background:var(--bg); color:var(--text);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 18% -10%, rgba(122,162,255,0.30), transparent 55%),
+        radial-gradient(900px 520px at 90% 0%, rgba(155,227,255,0.22), transparent 50%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
       line-height:1.55;
     }
-    a{color:inherit; text-decoration:none}
-    a:hover{text-decoration:underline}
-    .wrap{max-width:980px; margin:0 auto; padding:44px 18px 70px}
-    header{display:flex; gap:18px; justify-content:space-between; flex-wrap:wrap; align-items:flex-start}
-    h1{margin:0 0 6px; font-size:34px; letter-spacing:-0.4px}
-    .subtitle{margin:0; color:var(--muted)}
-    nav{display:flex; gap:14px; flex-wrap:wrap; margin-top:10px}
-    nav a{padding:8px 10px; border:1px solid var(--line); border-radius:999px; background:#fff}
-    .meta{margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; color:var(--muted)}
-    .chip{display:inline-block; padding:6px 10px; background:var(--chip); border:1px solid var(--line); border-radius:999px; font-size:14px}
-    .grid{display:grid; grid-template-columns: 1.1fr 0.9fr; gap:16px; margin-top:22px}
-    @media (max-width: 860px){ .grid{grid-template-columns:1fr} }
-    section{margin-top:26px}
-    h2{margin:0 0 12px; font-size:22px}
-    .card{
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:16px;
-      background:var(--card);
+
+    a{ color:inherit; text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+
+    .wrap{ max-width:var(--max); margin:0 auto; padding: 26px 18px 70px; }
+    .skip{
+      position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden;
     }
-    .card + .card{margin-top:12px}
-    .row{display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap}
-    .role{font-weight:650}
-    .where, .when{color:var(--muted); font-size:14px}
-    ul{margin:10px 0 0; padding-left:18px}
-    li{margin:6px 0}
-    .kpis{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
-    .kpi{padding:10px 12px; border:1px solid var(--line); border-radius:14px; background:#fff}
-    .kpi b{display:block; font-size:14px}
-    .kpi span{color:var(--muted); font-size:13px}
-    .footer{margin-top:34px; padding-top:14px; border-top:1px solid var(--line); color:var(--muted); font-size:14px}
-    .small{font-size:14px; color:var(--muted)}
-    .btns{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+    .skip:focus{
+      left:18px; top:18px; width:auto; height:auto; padding:10px 12px;
+      background:var(--card); border:1px solid var(--line); border-radius:12px; z-index:9999;
+    }
+
+    /* Top bar */
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding: 10px 12px;
+      border:1px solid var(--line); border-radius: var(--radius2);
+      background: rgba(255,255,255,0.02);
+      backdrop-filter: blur(10px);
+    }
+    [data-theme="light"] .topbar{ background: rgba(255,255,255,0.70); }
+    .brand{ display:flex; align-items:center; gap:10px; min-width:220px; }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 4px rgba(122,162,255,0.15);
+    }
+    .brand strong{ letter-spacing: -0.2px; }
+    .nav{
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:center;
+    }
+    .pill{
+      padding:8px 10px; border:1px solid var(--line); border-radius:999px;
+      background: rgba(255,255,255,0.03);
+      font-size:14px; color:var(--muted);
+    }
+    [data-theme="light"] .pill{ background: rgba(17,24,39,0.03); }
+    .pill:hover{ text-decoration:none; border-color: rgba(122,162,255,0.45); color: var(--text); }
+
+    .actions{ display:flex; gap:10px; align-items:center; justify-content:flex-end; }
     .btn{
-      display:inline-block;
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background:#fff;
-    }
-    .embedHint{
-      margin-top:10px;
-      padding:12px;
-      border:1px dashed #cfcfcf;
-      border-radius:14px;
-      background:#fff;
-      color:var(--muted);
+      display:inline-flex; align-items:center; gap:8px;
+      padding:9px 12px; border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
       font-size:14px;
     }
+    [data-theme="light"] .btn{ background: rgba(17,24,39,0.03); }
+    .btn:hover{ text-decoration:none; border-color: rgba(122,162,255,0.55); }
+    .btnPrimary{
+      border-color: transparent;
+      background: linear-gradient(135deg, rgba(122,162,255,0.95), rgba(155,227,255,0.75));
+      color: #0b1220;
+      font-weight: 650;
+    }
+    [data-theme="light"] .btnPrimary{ color:#061022; }
+    .icon{ width:16px; height:16px; display:inline-block; }
+
+    /* Hero */
+    .hero{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap:16px;
+      align-items:stretch;
+    }
+    @media (max-width: 920px){
+      .hero{ grid-template-columns: 1fr; }
+      .brand{ min-width:unset; }
+    }
+
+    .card{
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    [data-theme="light"] .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.86));
+    }
+    .cardInner{ padding: 20px; }
+
+    h1{
+      margin: 0 0 10px;
+      font-size: 40px;
+      letter-spacing:-0.7px;
+      line-height:1.1;
+    }
+    .subtitle{
+      margin:0;
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 64ch;
+    }
+    .badges{ display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:7px 10px; border-radius: 999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+      font-size: 14px;
+    }
+    [data-theme="light"] .badge{ background: rgba(17,24,39,0.03); }
+    .badge b{ color: var(--text); font-weight:650; }
+
+    .cta{ display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; }
+
+    /* Photo card */
+    .photoWrap{
+      height: 100%;
+      display:flex; flex-direction:column;
+    }
+    .photoTop{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding:18px 18px 0;
+    }
+    .photoTop .mini{ color: var(--muted); font-size:14px; }
+    .photo{
+      margin: 14px auto 18px;
+      width: 220px; height: 220px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      overflow:hidden;
+      background: rgba(255,255,255,0.04);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+    }
+    .photo img{
+      width:100%; height:100%; object-fit:cover; display:block;
+      transform: translateZ(0);
+    }
+    .photoNote{
+      padding: 0 18px 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .photoNote code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px;
+    }
+
+    /* Sections */
+    section{ margin-top: 28px; }
+    .sectionTitle{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      margin: 0 0 12px;
+    }
+    h2{
+      margin:0;
+      font-size: 20px;
+      letter-spacing:-0.2px;
+    }
+    .hint{ color:var(--muted); font-size:14px; margin:0; }
+
+    /* Projects grid */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:16px;
+    }
+    @media (max-width: 860px){ .grid{ grid-template-columns: 1fr; } }
+
+    .proj{
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,0.02);
+      overflow:hidden;
+    }
+    [data-theme="light"] .proj{ background: rgba(17,24,39,0.02); }
+    .proj .inner{ padding: 16px; }
+    .proj h3{ margin:0 0 6px; font-size: 17px; letter-spacing:-0.2px; }
+    .proj p{ margin:0; color: var(--muted); font-size:14px; }
+    .tags{ display:flex; gap:8px; flex-wrap:wrap; margin-top: 12px; }
+    .tag{
+      padding: 6px 10px; border-radius: 999px;
+      border:1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      background: rgba(255,255,255,0.02);
+    }
+    .links{
+      display:flex; gap:10px; flex-wrap:wrap; margin-top: 12px;
+    }
+    .links a{
+      padding:8px 10px; border-radius: 12px; border: 1px solid var(--line);
+      font-size: 13px; color: var(--text);
+      background: rgba(255,255,255,0.02);
+    }
+    .links a:hover{ text-decoration:none; border-color: rgba(122,162,255,0.55); }
+
+    /* Two-column content blocks */
+    .twoCol{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+    }
+    @media (max-width: 920px){ .twoCol{ grid-template-columns: 1fr; } }
+
+    .panel{
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,0.02);
+      padding: 16px;
+    }
+    [data-theme="light"] .panel{ background: rgba(17,24,39,0.02); }
+    .panel h3{ margin:0 0 8px; font-size: 16px; }
+    .panel ul{ margin:0; padding-left: 18px; color: var(--muted); }
+    .panel li{ margin:8px 0; }
+
+    /* Skills chips */
+    .chips{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px; }
+    .chip{
+      padding: 7px 10px; border-radius: 999px;
+      border:1px solid var(--line);
+      font-size: 13px; color: var(--muted);
+      background: rgba(255,255,255,0.02);
+    }
+    [data-theme="light"] .chip{ background: rgba(17,24,39,0.02); }
+
+    /* Footer */
+    footer{
+      margin-top: 34px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+      font-size: 14px;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      html{ scroll-behavior:auto; }
+    }
   </style>
+
+  <script>
+    // Theme: remembers your choice
+    (function(){
+      const saved = localStorage.getItem("theme");
+      const prefersLight = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
+      const theme = saved || (prefersLight ? "light" : "dark");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+
+  <!-- Structured data (optional) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Sakib Shaukat",
+    "jobTitle":"Data Analyst / BI / Data Science",
+    "email":"mailto:17shaukat@gmail.com",
+    "telephone":"+49 162 4042942",
+    "address":{"@type":"PostalAddress","addressLocality":"Hamburg","addressCountry":"DE"},
+    "sameAs":[
+      "https://www.linkedin.com/in/sakib-shaukat/"
+    ]
+  }
+  </script>
 </head>
 
 <body>
+  <a class="skip" href="#main">Skip to content</a>
+
   <div class="wrap">
-    <header>
-      <div>
-        <h1>Sakib Shaukat</h1>
-        <p class="subtitle">
-          Data Science (M.Sc., near completion) · Machine Learning · Analytics · BI
-        </p>
-
-        <div class="meta">
-          <span class="chip">Hamburg, Germany</span>
-          <span class="chip">German (B2–C1)</span>
-          <span class="chip">English (C1)</span>
+    <!-- Top bar -->
+    <div class="topbar" role="navigation" aria-label="Primary">
+      <div class="brand">
+        <span class="dot" aria-hidden="true"></span>
+        <div>
+          <strong>Sakib Shaukat</strong><br />
+          <span style="color:var(--muted); font-size:13px;">Data / BI • SQL • Python • Tableau</span>
         </div>
-
-        <div class="kpis" aria-label="Highlights">
-          <div class="kpi"><b>~3 years</b><span>experience (industry + research)</span></div>
-          <div class="kpi"><b>Python · SQL</b><span>ETL, analysis, modeling</span></div>
-          <div class="kpi"><b>BI</b><span>Power BI dashboards</span></div>
-        </div>
-
-        <div class="btns">
-          <a class="btn" href="mailto:17shaukat@gmail.com">17shaukat@gmail.com</a>
-          <a class="btn" href="tel:+491624042942">+49 162 4042942</a>
-          <a class="btn" href="https://www.linkedin.com/in/sakib-shaukat/">LinkedIn</a>
-          <a class="btn" href="https://github.com/YOUR_GITHUB_USERNAME">GitHub</a>
-        </div>
-
-        <nav aria-label="Site navigation">
-          <a href="#projects">Projects</a>
-          <a href="#dashboards">Dashboards</a>
-          <a href="#experience">Experience</a>
-          <a href="#education">Education</a>
-          <a href="#skills">Skills</a>
-        </nav>
       </div>
-    </header>
 
-    <div class="grid">
-      <section class="card" aria-label="About">
-        <h2>About</h2>
-        <p class="small" style="margin:0;">
-          I’m a Data Science M.Sc. student (near completion) with a focus on machine learning,
-          statistical modeling, data analysis, and visualization. I build end-to-end workflows:
-          data collection → SQL/ETL → modeling → explainability → dashboards.
-        </p>
-      </section>
+      <div class="nav" aria-label="Sections">
+        <a class="pill" href="#projects">Projects</a>
+        <a class="pill" href="#dashboards">Dashboards</a>
+        <a class="pill" href="#about">About</a>
+        <a class="pill" href="#skills">Skills</a>
+      </div>
 
-      <section class="card" aria-label="What I’m looking for">
-        <h2>Target roles</h2>
-        <p class="small" style="margin:0;">
-          Data Analyst · BI Analyst · Data Scientist (applied) · ML/Analytics Engineer
-        </p>
-        <p class="small" style="margin:10px 0 0;">
-          Interests: energy systems analytics, industrial data, time series, optimization, and computer vision.
-        </p>
-      </section>
+      <div class="actions">
+        <button class="btn" id="themeBtn" type="button" aria-label="Toggle theme">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l1.4 1.4M17.6 17.6 19 19M19 5l-1.4 1.4M5 19l1.4-1.4"
+                  stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          Theme
+        </button>
+
+        <!-- Put resume.pdf in the repo root and this will work -->
+        <a class="btn" href="resume.pdf">Resume</a>
+
+        <a class="btn btnPrimary" href="#projects" aria-label="Jump to projects">View work</a>
+      </div>
     </div>
 
+    <!-- Hero -->
+    <div class="hero" id="main">
+      <div class="card">
+        <div class="cardInner">
+          <h1>Data & BI Portfolio</h1>
+          <p class="subtitle">
+            I build analytics products end-to-end: data prep (SQL/Python) → modeling/analysis → clear Tableau dashboards and case studies.
+            Currently based in <b>Hamburg, Germany</b>.
+          </p>
+
+          <div class="badges" aria-label="Highlights">
+            <span class="badge"><b>Experience</b> ~3 years (industry + research)</span>
+            <span class="badge"><b>Focus</b> Analytics • ML • Dashboards</span>
+            <span class="badge"><b>Languages</b> English (C1) • German (B2–C1)</span>
+          </div>
+
+          <div class="cta">
+            <a class="btn btnPrimary" href="mailto:17shaukat@gmail.com">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="1.8"/>
+                <path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Email
+            </a>
+            <a class="btn" href="https://www.linkedin.com/in/sakib-shaukat/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a class="btn" href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="btn" href="tel:+491624042942">+49 162 4042942</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card photoWrap" aria-label="Profile photo">
+        <div class="photoTop">
+          <div>
+            <div style="font-weight:650;">Profile</div>
+            <div class="mini">Photo + quick context</div>
+          </div>
+          <span class="pill" style="cursor:default;">Open to roles</span>
+        </div>
+
+        <div class="photo" aria-label="Sakib photo">
+          <!-- Add your photo file to: assets/profile.jpg (and optional assets/profile.webp) -->
+          <picture>
+            <source srcset="assets/profile.webp" type="image/webp">
+            <img src="assets/profile.jpg" alt="Photo of Sakib Shaukat" />
+          </picture>
+        </div>
+
+        <div class="photoNote">
+          Add your image file in your repo:
+          <br /><code>assets/profile.jpg</code> (recommended: square image, 800×800 or higher).
+        </div>
+      </div>
+    </div>
+
+    <!-- Projects -->
     <section id="projects">
-      <h2>Projects</h2>
-
-      <div class="card">
-        <div class="row">
-          <div class="role">Eye-Tracking Fixation Duration Analysis (Applied Bayesian Data Analysis)</div>
-          <div class="when">Course Project</div>
-        </div>
-        <div class="where">Hierarchical Bayesian modeling of age- and time-dependent fixation patterns (NEMO Eye-Tracking data).</div>
-        <ul>
-          <li>Built a hierarchical model to capture between-subject variability and temporal effects.</li>
-          <li>Communicated results with clear visuals and interpretation.</li>
-        </ul>
-        <p class="small" style="margin-top:10px;">
-          <a href="PASTE_GITHUB_LINK_HERE">Read analysis</a>
-        </p>
+      <div class="sectionTitle">
+        <h2>Featured projects</h2>
+        <p class="hint">Keep these as 4 strong case studies (dashboard + repo + short write-up).</p>
       </div>
 
-      <div class="card">
-        <div class="row">
-          <div class="role">Train Seat Reservation Web App (Databases)</div>
-          <div class="when">Course Project</div>
-        </div>
-        <div class="where">Flask + JavaScript web app with PostgreSQL backend (full CRUD).</div>
-        <ul>
-          <li>Designed relational schema and implemented API + UI workflows.</li>
-          <li>Focused on data integrity and a simple user flow.</li>
-        </ul>
-        <p class="small" style="margin-top:10px;">
-          <a href="PASTE_GITHUB_LINK_HERE">View repository</a>
-        </p>
-      </div>
+      <div class="grid">
+        <!-- Project 1 -->
+        <article class="proj">
+          <div class="inner">
+            <h3>Project 1 — KPI / Sales Dashboard</h3>
+            <p>Interactive Tableau dashboard: KPIs, time trends, category breakdown, and filters. (Replace with your final story.)</p>
+            <div class="tags">
+              <span class="tag">Tableau</span>
+              <span class="tag">Data cleaning</span>
+              <span class="tag">Dashboard design</span>
+            </div>
+            <div class="links">
+              <a href="PASTE_TABLEAU_LINK">Live dashboard</a>
+              <a href="PASTE_REPO_LINK">GitHub repo</a>
+              <a href="PASTE_WRITEUP_LINK">Case study</a>
+            </div>
+          </div>
+        </article>
 
-      <div class="card">
-        <div class="row">
-          <div class="role">Evonik Use Case: Aerial Pipeline Monitoring (Industrial Data Analysis)</div>
-          <div class="when">Use Case</div>
-        </div>
-        <div class="where">YOLO object detection on CVAT-annotated aerial images to identify potential hazards (e.g., construction sites, sagging).</div>
-        <ul>
-          <li>Set up dataset + labeling workflow and trained an object detection model.</li>
-          <li>Evaluated detections and summarized operational risks.</li>
-        </ul>
-        <p class="small" style="margin-top:10px;">
-          <a href="PASTE_GITHUB_LINK_HERE">View write-up</a>
-        </p>
+        <!-- Project 2 -->
+        <article class="proj">
+          <div class="inner">
+            <h3>Project 2 — Cohort Retention Analysis</h3>
+            <p>Cohort table + retention curves with insights and recommendations. (Replace with your dataset and findings.)</p>
+            <div class="tags">
+              <span class="tag">SQL</span>
+              <span class="tag">Python</span>
+              <span class="tag">Analytics</span>
+            </div>
+            <div class="links">
+              <a href="PASTE_DASHBOARD_OR_NOTEBOOK">Notebook / Dashboard</a>
+              <a href="PASTE_REPO_LINK">GitHub repo</a>
+              <a href="PASTE_WRITEUP_LINK">Case study</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="proj">
+          <div class="inner">
+            <h3>Project 3 — Operations / Monitoring</h3>
+            <p>Monitoring view with trends, anomalies, and operational KPIs. (Replace with your domain: energy/industrial/etc.)</p>
+            <div class="tags">
+              <span class="tag">Tableau</span>
+              <span class="tag">Time series</span>
+              <span class="tag">KPIs</span>
+            </div>
+            <div class="links">
+              <a href="PASTE_TABLEAU_LINK">Live dashboard</a>
+              <a href="PASTE_REPO_LINK">GitHub repo</a>
+              <a href="PASTE_WRITEUP_LINK">Case study</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 4 -->
+        <article class="proj">
+          <div class="inner">
+            <h3>Project 4 — Applied ML (Computer Vision / Forecasting)</h3>
+            <p>Applied ML work with clear evaluation, explainability, and practical takeaways. (Replace with your strongest ML project.)</p>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">ML</span>
+              <span class="tag">SHAP / Explainability</span>
+            </div>
+            <div class="links">
+              <a href="PASTE_DEMO_LINK">Demo</a>
+              <a href="PASTE_REPO_LINK">GitHub repo</a>
+              <a href="PASTE_WRITEUP_LINK">Case study</a>
+            </div>
+          </div>
+        </article>
       </div>
     </section>
 
+    <!-- Dashboards -->
     <section id="dashboards">
-      <h2>Dashboards</h2>
+      <div class="sectionTitle">
+        <h2>Dashboard gallery</h2>
+        <p class="hint">Embed Tableau Public vizzes here (or link out if you prefer).</p>
+      </div>
 
-      <div class="card">
-        <div class="row">
-          <div class="role">Tableau Portfolio Dashboards</div>
-          <div class="when">Interactive</div>
+      <div class="panel">
+        <h3>Tableau Public embeds</h3>
+        <ul>
+          <li>On Tableau Public: open your viz → Share → copy <b>Embed Code</b>.</li>
+          <li>Paste the embed snippet below (replace this panel contents).</li>
+        </ul>
+        <!-- Placeholder: paste Tableau embed code here -->
+        <!--
+        <div style="margin-top:12px;">
+          ... Tableau embed snippet ...
         </div>
-        <p class="small" style="margin:8px 0 0;">
-          Add your Tableau Public dashboards here. Recommended set: (1) Sales/KPI dashboard, (2) Cohort retention,
-          (3) Operational monitoring dashboard.
-        </p>
+        -->
+      </div>
+    </section>
 
-        <div class="embedHint">
-          <b>How to embed:</b> On Tableau Public, open your viz → Share → copy the Embed Code →
-          paste it here (replace this box).<br/>
-          You can also just link your dashboard: <a href="PASTE_TABLEAU_PUBLIC_LINK">View on Tableau Public</a>
+    <!-- About / Experience -->
+    <section id="about">
+      <div class="sectionTitle">
+        <h2>About</h2>
+        <p class="hint">Short and credible (not a full CV). Resume stays as a link.</p>
+      </div>
+
+      <div class="twoCol">
+        <div class="panel">
+          <h3>Summary</h3>
+          <ul>
+            <li>Data Science M.Sc. (near completion) with practical analytics + ML experience.</li>
+            <li>Comfortable delivering end-to-end: data prep → modeling/analysis → dashboards.</li>
+            <li>Interested in industrial/energy analytics, time series, and applied computer vision.</li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <h3>Experience highlights</h3>
+          <ul>
+            <li><b>Fraunhofer IEG</b> — Research Assistant (Mar 2024 – Present): ML + optimization, ETL, dashboards.</li>
+            <li><b>TCS Research</b> — Systems Engineer (Sep 2021 – Mar 2023): CV pipelines for sports video event detection.</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <section id="experience">
-      <h2>Experience</h2>
-
-      <div class="card">
-        <div class="row">
-          <div class="role">Research Assistant — Fraunhofer IEG</div>
-          <div class="when">Mar 2024 – Present · Bochum, Germany</div>
-        </div>
-        <ul>
-          <li>Worked on projects including ORC power plant performance prediction/optimization and AI-based drilling data analysis.</li>
-          <li>Collected and integrated plant logs + historical weather data; built SQL-based ETL pipelines (extract, clean, transform).</li>
-          <li>Developed and compared ML/DL models (XGBoost, ANN, 1D-CNN, LSTM, Transformer), achieving very low MAPE in experiments.</li>
-          <li>Used SHAP, permutation importance, and optimization methods (Genetic Algorithms, PSO) to analyze drivers and improve efficiency.</li>
-          <li>Created interactive dashboards in Power BI for results and feature insights.</li>
-        </ul>
-        <p class="small" style="margin-top:10px;">
-          Tools: Python (Pandas, scikit-learn, TensorFlow/Keras), SQL, Power BI
-        </p>
-      </div>
-
-      <div class="card">
-        <div class="row">
-          <div class="role">Systems Engineer (ML Research Projects) — TCS Research</div>
-          <div class="when">Sep 2021 – Mar 2023 · Pune, India</div>
-        </div>
-        <ul>
-          <li>Built computer-vision solutions to detect complex events in sports videos.</li>
-          <li>Extracted low-level signals (object detection, pose estimation, segmentation) from pretrained deep-learning models.</li>
-          <li>Used Inductive Logic Programming (ALEPH) to create logical predicates/rules for event detection (e.g., goal, shot, foul).</li>
-          <li>Designed workflows for personalized highlights and dynamic ad placement based on detected events.</li>
-        </ul>
-        <p class="small" style="margin-top:10px;">
-          Tools: Python (OpenCV, PyTorch, TensorFlow), SQL, ALEPH, Linux
-        </p>
-      </div>
-    </section>
-
-    <section id="education">
-      <h2>Education</h2>
-
-      <div class="card">
-        <div class="row">
-          <div class="role">TU Dortmund — M.Sc. Data Science</div>
-          <div class="when">Expected 2026 · Dortmund, Germany</div>
-        </div>
-        <ul>
-          <li>Tutor: Advanced Statistical Learning (Summer 2024) — supported students with applied statistics/ML concepts and exercises.</li>
-          <li>Master’s thesis: <i>Prediction and Optimization of Organic Rankine Cycle (ORC) Performance Using Machine Learning and Optimization Techniques</i>.</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <div class="row">
-          <div class="role">IIT Ropar — B.Tech Electrical Engineering</div>
-          <div class="when">2021 · Rupnagar, India</div>
-        </div>
-        <ul>
-          <li>Minor in Computer Science (programming, algorithms, machine learning).</li>
-          <li>Research internship: video obscenity detection using transfer learning (Inception V3) and keyframe extraction.</li>
-        </ul>
-      </div>
-    </section>
-
+    <!-- Skills -->
     <section id="skills">
-      <h2>Skills</h2>
-
-      <div class="card">
-        <div class="row">
-          <div class="role">Core</div>
-          <div class="when"></div>
-        </div>
-        <div class="meta" style="margin-top:10px;">
-          <span class="chip">Python</span>
-          <span class="chip">SQL</span>
-          <span class="chip">Power BI</span>
-          <span class="chip">Tableau</span>
-          <span class="chip">ETL</span>
-          <span class="chip">Data Analysis</span>
-          <span class="chip">Data Visualization</span>
-          <span class="chip">A/B Testing</span>
-        </div>
+      <div class="sectionTitle">
+        <h2>Skills</h2>
+        <p class="hint">Tools recruiters expect to see at a glance.</p>
       </div>
 
-      <div class="card">
-        <div class="row">
-          <div class="role">Data / Platforms</div>
+      <div class="twoCol">
+        <div class="panel">
+          <h3>Core</h3>
+          <div class="chips">
+            <span class="chip">SQL</span>
+            <span class="chip">Python</span>
+            <span class="chip">Tableau</span>
+            <span class="chip">Power BI</span>
+            <span class="chip">ETL</span>
+            <span class="chip">Data modeling</span>
+            <span class="chip">Data visualization</span>
+          </div>
         </div>
-        <div class="meta" style="margin-top:10px;">
-          <span class="chip">Snowflake</span>
-          <span class="chip">Google BigQuery</span>
-          <span class="chip">SAS</span>
-          <span class="chip">Excel</span>
-          <span class="chip">Git</span>
-        </div>
-      </div>
 
-      <div class="card">
-        <div class="row">
-          <div class="role">ML / Engineering</div>
-        </div>
-        <div class="meta" style="margin-top:10px;">
-          <span class="chip">scikit-learn</span>
-          <span class="chip">TensorFlow / Keras</span>
-          <span class="chip">PyTorch</span>
-          <span class="chip">SHAP</span>
-          <span class="chip">Linux</span>
-          <span class="chip">HPC</span>
-          <span class="chip">R</span>
-          <span class="chip">HTML</span>
-          <span class="chip">CSS</span>
-          <span class="chip">PHP</span>
+        <div class="panel">
+          <h3>ML / Platforms</h3>
+          <div class="chips">
+            <span class="chip">scikit-learn</span>
+            <span class="chip">TensorFlow / Keras</span>
+            <span class="chip">PyTorch</span>
+            <span class="chip">SHAP</span>
+            <span class="chip">BigQuery</span>
+            <span class="chip">Snowflake</span>
+            <span class="chip">Git</span>
+            <span class="chip">Linux</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <div class="footer">
-      <div>© <span id="year"></span> Sakib Shaukat · Built with GitHub Pages</div>
-      <div class="small">Tip: keep projects public-data only; link the dataset + a short “Insights” section under each project.</div>
-    </div>
+    <footer>
+      <div>© <span id="year"></span> Sakib Shaukat · Built on GitHub Pages</div>
+      <div>
+        <a class="pill" href="mailto:17shaukat@gmail.com">17shaukat@gmail.com</a>
+        <a class="pill" href="https://www.linkedin.com/in/sakib-shaukat/" target="_blank" rel="noreferrer">LinkedIn</a>
+      </div>
+    </footer>
   </div>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Toggle theme
+    document.getElementById("themeBtn").addEventListener("click", function(){
+      const cur = document.documentElement.getAttribute("data-theme") || "dark";
+      const next = cur === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem("theme", next);
+    });
   </script>
 </body>
 </html>
