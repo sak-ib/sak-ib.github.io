@@ -1,78 +1,140 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
   <title>Sakib Shaukat — Data Scientist / Data Analyst</title>
-  <meta name="description" content="Sakib Shaukat — Data Scientist / Data Analyst portfolio. Featured analytics case studies, Tableau dashboards, and applied ML projects." />
+  <meta name="description" content="Sakib Shaukat — Data Scientist / Data Analyst portfolio. Analytics case studies, Tableau dashboards, and applied ML projects." />
 
-  <!-- Open Graph (nice for sharing on LinkedIn) -->
   <meta property="og:title" content="Sakib Shaukat — Data Scientist / Data Analyst" />
   <meta property="og:description" content="Analytics case studies, Tableau dashboards, and applied ML projects." />
   <meta property="og:type" content="website" />
-  <!-- <meta property="og:image" content="https://sak-ib.github.io/assets/og.png" /> -->
 
   <style>
+    /* =========================
+       Theme tokens
+    ========================== */
     :root{
-      /* Light theme only */
+      --max: 1120px;
+      --radius: 18px;
+      --radius2: 26px;
+
+      --dur: 240ms;
+      --ease: cubic-bezier(.2,.8,.2,1);
+
+      /* Light default */
       --bg0:#f7f9ff;
       --bg1:#ffffff;
-
       --text:#0b1020;
       --muted:#4a5874;
       --line: rgba(11,16,32,0.10);
-
       --card:#ffffff;
       --card2:#fbfcff;
 
       --accent:#295bff;
       --accent2:#0ea5e9;
       --accent3:#8b5cf6;
+      --accent4:#10b981;
 
       --shadow: 0 18px 50px rgba(11,16,32,0.10);
       --shadow2: 0 10px 30px rgba(11,16,32,0.08);
 
-      --radius: 18px;
-      --radius2: 26px;
-      --max: 1120px;
+      --pillBg: rgba(11,16,32,0.02);
+      --pillHover: rgba(41,91,255,0.06);
+
+      --linkBg: rgba(41,91,255,0.06);
+      --linkBorder: rgba(41,91,255,0.18);
+      --linkText: #12307a;
+
+      --heroGlow1: rgba(41,91,255,0.14);
+      --heroGlow2: rgba(14,165,233,0.12);
+      --heroGlow3: rgba(139,92,246,0.10);
     }
 
+    html[data-theme="dark"]{
+      --bg0:#0b1220;
+      --bg1:#0b1220;
+      --text:#eaf0ff;
+      --muted:#b6c2e0;
+      --line: rgba(255,255,255,0.10);
+      --card: rgba(255,255,255,0.05);
+      --card2: rgba(255,255,255,0.03);
+
+      --shadow: 0 18px 60px rgba(0,0,0,0.35);
+      --shadow2: 0 10px 36px rgba(0,0,0,0.28);
+
+      --pillBg: rgba(255,255,255,0.04);
+      --pillHover: rgba(122,162,255,0.10);
+
+      --linkBg: rgba(122,162,255,0.10);
+      --linkBorder: rgba(122,162,255,0.25);
+      --linkText: #eaf0ff;
+
+      --heroGlow1: rgba(122,162,255,0.25);
+      --heroGlow2: rgba(155,227,255,0.18);
+      --heroGlow3: rgba(139,92,246,0.18);
+    }
+
+    /* =========================
+       Base
+    ========================== */
     *{ box-sizing:border-box; }
     html{ scroll-behavior:smooth; }
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      color:var(--text);
+      color: var(--text);
       background:
-        radial-gradient(900px 520px at 15% -10%, rgba(41,91,255,0.14), transparent 55%),
-        radial-gradient(900px 520px at 85% 0%, rgba(14,165,233,0.12), transparent 55%),
-        radial-gradient(900px 520px at 70% 90%, rgba(139,92,246,0.10), transparent 55%),
+        radial-gradient(900px 520px at 15% -10%, var(--heroGlow1), transparent 55%),
+        radial-gradient(900px 520px at 85% 0%, var(--heroGlow2), transparent 55%),
+        radial-gradient(900px 520px at 70% 90%, var(--heroGlow3), transparent 55%),
         linear-gradient(180deg, var(--bg0), var(--bg1));
-      line-height:1.55;
+      line-height:1.6;
     }
-
     a{ color:inherit; text-decoration:none; }
     a:hover{ text-decoration:underline; }
 
-    .wrap{ max-width:var(--max); margin:0 auto; padding: 26px 18px 70px; }
+    .wrap{ max-width: var(--max); margin:0 auto; padding: 22px 18px 80px; }
 
     .skip{
       position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden;
     }
     .skip:focus{
       left:18px; top:18px; width:auto; height:auto; padding:10px 12px;
-      background:var(--card); border:1px solid var(--line); border-radius:12px; z-index:9999;
+      background: var(--card); border:1px solid var(--line); border-radius:12px; z-index:9999;
     }
 
-    /* Top bar */
+    /* Optional: "page-like" sections (not aggressive snapping) */
+    .section{
+      padding: 64px 0;
+      scroll-snap-align: start;
+    }
+    @media (min-width: 920px){
+      body{ scroll-snap-type: y proximity; }
+      .section{ min-height: 92vh; display:flex; align-items:center; }
+      .section > .sectionInner{ width:100%; }
+    }
+
+    /* =========================
+       Topbar
+    ========================== */
     .topbar{
+      position: sticky;
+      top: 14px;
+      z-index: 20;
+
       display:flex; align-items:center; justify-content:space-between;
       gap:12px; padding: 10px 12px;
-      border:1px solid var(--line); border-radius: var(--radius2);
-      background: rgba(255,255,255,0.78);
+
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,0.75);
       backdrop-filter: blur(10px);
       box-shadow: var(--shadow2);
+    }
+    html[data-theme="dark"] .topbar{
+      background: rgba(11,18,32,0.60);
     }
 
     .brand{ display:flex; align-items:center; gap:10px; min-width:240px; }
@@ -81,45 +143,50 @@
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       box-shadow: 0 0 0 6px rgba(41,91,255,0.10);
     }
-    .brand strong{ letter-spacing: -0.2px; }
-    .brand small{ color:var(--muted); font-size:13px; }
+    html[data-theme="dark"] .dot{ box-shadow: 0 0 0 6px rgba(122,162,255,0.14); }
 
-    .nav{
-      display:flex; gap:10px; flex-wrap:wrap; justify-content:center;
-    }
+    .brand strong{ letter-spacing:-0.2px; }
+    .brand small{ color: var(--muted); font-size:13px; }
+
+    .nav{ display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
     .pill{
       padding:8px 10px;
       border:1px solid var(--line);
       border-radius:999px;
-      background: rgba(11,16,32,0.02);
+      background: var(--pillBg);
       font-size:14px;
-      color:var(--muted);
-      transition: transform .12s ease, border-color .12s ease, background .12s ease, color .12s ease;
+      color: var(--muted);
+      transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease), background var(--dur) var(--ease), color var(--dur) var(--ease);
     }
     .pill:hover{
       text-decoration:none;
       border-color: rgba(41,91,255,0.35);
-      background: rgba(41,91,255,0.06);
+      background: var(--pillHover);
       color: var(--text);
       transform: translateY(-1px);
     }
+    html[data-theme="dark"] .pill:hover{ border-color: rgba(122,162,255,0.45); }
 
     .actions{ display:flex; gap:10px; align-items:center; justify-content:flex-end; }
+
     .btn{
       display:inline-flex; align-items:center; gap:8px;
       padding:9px 12px;
       border-radius: 14px;
       border: 1px solid var(--line);
-      background: rgba(11,16,32,0.02);
+      background: var(--pillBg);
       font-size:14px;
-      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+      transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+      cursor:pointer;
     }
     .btn:hover{
       text-decoration:none;
       border-color: rgba(41,91,255,0.35);
-      background: rgba(41,91,255,0.06);
+      background: var(--pillHover);
       transform: translateY(-1px);
     }
+    html[data-theme="dark"] .btn:hover{ border-color: rgba(122,162,255,0.45); }
+
     .btnPrimary{
       border-color: transparent;
       background: linear-gradient(135deg, rgba(41,91,255,0.95), rgba(14,165,233,0.85));
@@ -127,15 +194,33 @@
       font-weight: 650;
       box-shadow: 0 14px 30px rgba(41,91,255,0.18);
     }
+    html[data-theme="dark"] .btnPrimary{
+      background: linear-gradient(135deg, rgba(122,162,255,0.95), rgba(155,227,255,0.80));
+      color:#071022;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+    }
     .btnPrimary:hover{
       background: linear-gradient(135deg, rgba(41,91,255,1), rgba(139,92,246,0.90));
-      transform: translateY(-1px);
     }
+    html[data-theme="dark"] .btnPrimary:hover{
+      background: linear-gradient(135deg, rgba(155,227,255,0.95), rgba(139,92,246,0.85));
+    }
+
     .icon{ width:16px; height:16px; display:inline-block; }
 
-    /* Hero */
+    /* =========================
+       Cards / layout
+    ========================== */
+    .card{
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .cardInner{ padding: 22px; }
+
     .hero{
-      margin-top: 18px;
       display:grid;
       grid-template-columns: 1.25fr 0.75fr;
       gap:16px;
@@ -146,26 +231,17 @@
       .brand{ min-width:unset; }
     }
 
-    .card{
-      border:1px solid var(--line);
-      border-radius: var(--radius2);
-      background: linear-gradient(180deg, var(--card), var(--card2));
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .cardInner{ padding: 22px; }
-
     h1{
       margin: 0 0 10px;
-      font-size: 40px;
-      letter-spacing:-0.7px;
-      line-height:1.1;
+      font-size: 42px;
+      letter-spacing:-0.8px;
+      line-height:1.05;
     }
     .subtitle{
       margin:0;
       color: var(--muted);
       font-size: 16px;
-      max-width: 72ch;
+      max-width: 78ch;
     }
 
     .badges{ display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
@@ -174,42 +250,93 @@
       padding:7px 10px;
       border-radius: 999px;
       border:1px solid var(--line);
-      background: rgba(255,255,255,0.85);
+      background: rgba(255,255,255,0.75);
       color: var(--muted);
       font-size: 14px;
     }
+    html[data-theme="dark"] .badge{ background: rgba(255,255,255,0.06); }
     .badge b{ color: var(--text); font-weight:650; }
 
     .cta{ display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; }
 
-    /* Photo */
-    .photoWrap{ height: 100%; display:flex; flex-direction:column; }
-    .photoTop{
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
+    /* Profile panel extras */
+    .profileTop{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
       padding:18px 18px 0;
     }
-    .photoTop .mini{ color: var(--muted); font-size:14px; }
+    .mini{ color: var(--muted); font-size:14px; }
+
     .photo{
-      margin: 14px auto 18px;
+      margin: 14px auto 12px;
       width: 220px; height: 220px;
       border-radius: 999px;
-      border: 1px solid rgba(41,91,255,0.20);
+      border: 1px solid rgba(41,91,255,0.22);
       overflow:hidden;
       background: rgba(41,91,255,0.05);
       box-shadow: 0 18px 40px rgba(11,16,32,0.14);
+      position: relative;
     }
-    .photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+    html[data-theme="dark"] .photo{ border-color: rgba(122,162,255,0.35); }
 
-    /* Sections */
-    section{ margin-top: 30px; }
+    .photo:before{
+      content:"";
+      position:absolute; inset:-20px;
+      background: radial-gradient(closest-side, rgba(41,91,255,0.18), transparent 65%);
+      filter: blur(18px);
+      opacity: 0.9;
+      pointer-events:none;
+    }
+    html[data-theme="dark"] .photo:before{
+      background: radial-gradient(closest-side, rgba(155,227,255,0.18), transparent 65%);
+      opacity: 0.7;
+    }
+
+    .photo img{ width:100%; height:100%; object-fit:cover; display:block; position:relative; z-index:1; }
+
+    .storyBlocks{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      padding: 0 18px 18px;
+    }
+    .block{
+      border:1px solid var(--line);
+      border-radius: 18px;
+      padding: 10px 12px;
+      background: rgba(255,255,255,0.75);
+      box-shadow: var(--shadow2);
+      transition: transform var(--dur) var(--ease);
+    }
+    html[data-theme="dark"] .block{
+      background: rgba(255,255,255,0.05);
+    }
+    .block:hover{ transform: translateY(-2px); }
+    .block b{ display:block; font-size:13px; letter-spacing:-0.2px; }
+    .block span{ color: var(--muted); font-size:13px; }
+
+    .block.b1{ border-color: rgba(41,91,255,0.22); background: linear-gradient(180deg, rgba(41,91,255,0.08), rgba(255,255,255,0.75)); }
+    .block.b2{ border-color: rgba(14,165,233,0.22); background: linear-gradient(180deg, rgba(14,165,233,0.10), rgba(255,255,255,0.75)); }
+    .block.b3{ border-color: rgba(139,92,246,0.22); background: linear-gradient(180deg, rgba(139,92,246,0.10), rgba(255,255,255,0.75)); }
+    .block.b4{ border-color: rgba(16,185,129,0.22); background: linear-gradient(180deg, rgba(16,185,129,0.10), rgba(255,255,255,0.75)); }
+    html[data-theme="dark"] .block.b1{ background: linear-gradient(180deg, rgba(122,162,255,0.14), rgba(255,255,255,0.05)); }
+    html[data-theme="dark"] .block.b2{ background: linear-gradient(180deg, rgba(155,227,255,0.12), rgba(255,255,255,0.05)); }
+    html[data-theme="dark"] .block.b3{ background: linear-gradient(180deg, rgba(139,92,246,0.14), rgba(255,255,255,0.05)); }
+    html[data-theme="dark"] .block.b4{ background: linear-gradient(180deg, rgba(16,185,129,0.14), rgba(255,255,255,0.05)); }
+
+    /* =========================
+       Sections / headings
+    ========================== */
     .sectionTitle{
-      display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:12px; flex-wrap:wrap;
       margin: 0 0 12px;
     }
     h2{ margin:0; font-size: 20px; letter-spacing:-0.2px; }
-    .hint{ color:var(--muted); font-size:14px; margin:0; }
+    .hint{ margin:0; color:var(--muted); font-size:14px; }
 
-    /* Projects grid */
+    /* =========================
+       Projects grid
+    ========================== */
     .grid{
       display:grid;
       grid-template-columns: repeat(2, 1fr);
@@ -220,44 +347,49 @@
     .proj{
       border:1px solid var(--line);
       border-radius: var(--radius2);
-      background: rgba(255,255,255,0.85);
+      background: rgba(255,255,255,0.80);
       box-shadow: var(--shadow2);
       overflow:hidden;
-      transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease;
+      transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
     }
+    html[data-theme="dark"] .proj{ background: rgba(255,255,255,0.05); }
     .proj:hover{
-      transform: translateY(-2px);
+      transform: translateY(-3px);
       border-color: rgba(41,91,255,0.26);
       box-shadow: 0 18px 44px rgba(11,16,32,0.12);
     }
+    html[data-theme="dark"] .proj:hover{ border-color: rgba(122,162,255,0.35); }
+
     .proj .inner{ padding: 16px; }
     .proj h3{ margin:0 0 6px; font-size: 17px; letter-spacing:-0.2px; }
     .proj p{ margin:0; color: var(--muted); font-size:14px; }
 
     .tags{ display:flex; gap:8px; flex-wrap:wrap; margin-top: 12px; }
-
-    /* Colorful tags (subtle) */
     .tag{
       padding: 6px 10px;
       border-radius: 999px;
       border:1px solid var(--line);
       font-size: 13px;
-      color: #1f2a44;
+      color: var(--text);
       background: rgba(41,91,255,0.07);
     }
     .tag.t2{ background: rgba(14,165,233,0.10); }
     .tag.t3{ background: rgba(139,92,246,0.10); }
     .tag.t4{ background: rgba(16,185,129,0.10); }
+    html[data-theme="dark"] .tag{ background: rgba(122,162,255,0.14); }
+    html[data-theme="dark"] .tag.t2{ background: rgba(155,227,255,0.12); }
+    html[data-theme="dark"] .tag.t3{ background: rgba(139,92,246,0.14); }
+    html[data-theme="dark"] .tag.t4{ background: rgba(16,185,129,0.14); }
 
     .links{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 12px; }
     .links a{
       padding:8px 10px;
       border-radius: 12px;
-      border: 1px solid rgba(41,91,255,0.18);
+      border: 1px solid var(--linkBorder);
       font-size: 13px;
-      color: #12307a;
-      background: rgba(41,91,255,0.06);
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      color: var(--linkText);
+      background: var(--linkBg);
+      transition: transform var(--dur) var(--ease), background var(--dur) var(--ease), border-color var(--dur) var(--ease);
     }
     .links a:hover{
       text-decoration:none;
@@ -265,8 +397,14 @@
       background: rgba(41,91,255,0.10);
       transform: translateY(-1px);
     }
+    html[data-theme="dark"] .links a:hover{
+      border-color: rgba(122,162,255,0.45);
+      background: rgba(122,162,255,0.16);
+    }
 
-    /* Two-column panels */
+    /* =========================
+       Panels / skills
+    ========================== */
     .twoCol{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -277,15 +415,15 @@
     .panel{
       border:1px solid var(--line);
       border-radius: var(--radius2);
-      background: rgba(255,255,255,0.85);
+      background: rgba(255,255,255,0.80);
       box-shadow: var(--shadow2);
       padding: 16px;
     }
+    html[data-theme="dark"] .panel{ background: rgba(255,255,255,0.05); }
     .panel h3{ margin:0 0 8px; font-size: 16px; }
     .panel ul{ margin:0; padding-left: 18px; color: var(--muted); }
     .panel li{ margin:8px 0; }
 
-    /* Skills chips */
     .chips{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px; }
     .chip{
       padding: 7px 10px;
@@ -293,9 +431,26 @@
       border:1px solid var(--line);
       font-size: 13px;
       color: var(--muted);
-      background: rgba(11,16,32,0.02);
+      background: var(--pillBg);
     }
 
+    /* =========================
+       Reveal animations
+    ========================== */
+    .reveal{
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 520ms var(--ease), transform 520ms var(--ease);
+      will-change: opacity, transform;
+    }
+    .reveal.in{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================
+       Footer
+    ========================== */
     footer{
       margin-top: 34px;
       padding-top: 16px;
@@ -307,25 +462,10 @@
 
     @media (prefers-reduced-motion: reduce){
       html{ scroll-behavior:auto; }
-      .pill, .btn, .proj, .links a{ transition:none; }
+      .pill, .btn, .proj, .links a, .block{ transition:none; }
+      .reveal{ opacity:1; transform:none; }
     }
   </style>
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Person",
-    "name":"Sakib Shaukat",
-    "jobTitle":"Data Scientist / Data Analyst",
-    "email":"mailto:17shaukat@gmail.com",
-    "telephone":"+49 162 4042942",
-    "address":{"@type":"PostalAddress","addressLocality":"Hamburg","addressCountry":"DE"},
-    "sameAs":[
-      "https://www.linkedin.com/in/sakib-shaukat/",
-      "https://github.com/sak-ib"
-    ]
-  }
-  </script>
 </head>
 
 <body>
@@ -343,6 +483,7 @@
       </div>
 
       <div class="nav" aria-label="Sections">
+        <a class="pill" href="#profile">Profile</a>
         <a class="pill" href="#projects">Projects</a>
         <a class="pill" href="#dashboards">Dashboards</a>
         <a class="pill" href="#about">About</a>
@@ -350,255 +491,349 @@
       </div>
 
       <div class="actions">
+        <!-- Moon icon toggle -->
+        <button class="btn" id="themeBtn" type="button" aria-label="Toggle theme">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M21 14.5A7.5 7.5 0 0 1 10 3.6a6.8 6.8 0 1 0 11 10.9Z"
+                  stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Theme
+        </button>
+
         <a class="btn" href="resume.pdf">Resume</a>
         <a class="btn btnPrimary" href="#projects" aria-label="Jump to projects">View work</a>
       </div>
     </div>
 
-    <!-- Hero -->
-    <div class="hero" id="main">
-      <div class="card">
-        <div class="cardInner">
-          <h1>Portfolio</h1>
-          <p class="subtitle">
-            I build data products end-to-end: <b>clean data (SQL/Python)</b> → <b>analysis & modeling</b> →
-            <b>dashboards and case studies</b>. I focus on turning messy data into decisions.
-          </p>
+    <!-- PROFILE -->
+    <section class="section" id="profile">
+      <div class="sectionInner">
+        <div class="hero" id="main">
+          <!-- Story card -->
+          <div class="card reveal">
+            <div class="cardInner">
+              <h1>Hi, I’m Sakib.</h1>
+              <p class="subtitle">
+                I’m a <b>Data Scientist / Data Analyst</b> who likes building things that feel usable:
+                clear metrics, reliable data prep, and results you can explain.
+              </p>
 
-          <div class="badges" aria-label="Highlights">
-            <span class="badge"><b>Roles</b> Data Scientist • Data Analyst</span>
-            <span class="badge"><b>Strengths</b> Analytics • ML • Storytelling</span>
-            <span class="badge"><b>Location</b> Hamburg, Germany</span>
+              <div class="badges" aria-label="Highlights">
+                <span class="badge"><b>Focus</b> Analytics • ML • Storytelling</span>
+                <span class="badge"><b>Interests</b> Time series • Energy/Industrial • CV</span>
+                <span class="badge"><b>Based in</b> Hamburg, Germany</span>
+              </div>
+
+              <div style="height:14px"></div>
+
+              <!-- A bit more story (sparse, but richer than before) -->
+              <div class="reveal" style="transition-delay:120ms">
+                <p style="margin:0; color:var(--muted); max-width:78ch;">
+                  My background started in <b>Electrical Engineering</b>, where I learned to think in systems and constraints.
+                  I moved into <b>ML + analytics</b> because I enjoy turning raw signals into insights and decisions.
+                  Along the way I’ve worked on <b>computer vision</b> problems (sports video understanding) and
+                  <b>research-driven data science</b> in energy/industrial contexts.
+                </p>
+              </div>
+
+              <div style="height:14px"></div>
+
+              <div class="reveal" style="transition-delay:180ms">
+                <p style="margin:0; color:var(--muted); max-width:78ch;">
+                  What you’ll find below: <b>four case studies</b> (dashboards + notebooks + write-ups).
+                  Each one follows the same approach: define the question → build trustworthy data → analyze/model →
+                  communicate results with a clean narrative.
+                </p>
+              </div>
+
+              <div class="cta reveal" style="transition-delay:240ms">
+                <a class="btn btnPrimary" href="mailto:17shaukat@gmail.com" aria-label="Email Sakib">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="1.8"/>
+                    <path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Email
+                </a>
+                <a class="btn" href="https://www.linkedin.com/in/sakib-shaukat/" target="_blank" rel="noreferrer">LinkedIn</a>
+                <a class="btn" href="https://github.com/sak-ib" target="_blank" rel="noreferrer">GitHub</a>
+                <a class="btn" href="tel:+491624042942">+49 162 4042942</a>
+              </div>
+            </div>
           </div>
 
-          <div class="cta">
-            <a class="btn btnPrimary" href="mailto:17shaukat@gmail.com" aria-label="Email Sakib">
-              <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="1.8"/>
-                <path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              Email
-            </a>
-            <a class="btn" href="https://www.linkedin.com/in/sakib-shaukat/" target="_blank" rel="noreferrer">LinkedIn</a>
-            <a class="btn" href="https://github.com/sak-ib" target="_blank" rel="noreferrer">GitHub</a>
-            <a class="btn" href="tel:+491624042942">+49 162 4042942</a>
+          <!-- Profile card -->
+          <div class="card reveal" aria-label="Profile photo and quick facts">
+            <div class="profileTop">
+              <div>
+                <div style="font-weight:650;">Profile</div>
+                <div class="mini">Data Scientist / Data Analyst</div>
+              </div>
+              <span class="pill" style="cursor:default;">Open to roles</span>
+            </div>
+
+            <div class="photo" aria-label="Sakib photo">
+              <img src="/assets/profile.jpg" alt="Photo of Sakib Shaukat" />
+            </div>
+
+            <!-- Colorful blocks -->
+            <div class="storyBlocks" aria-label="Quick story blocks">
+              <div class="block b1">
+                <b>Now</b>
+                <span>Building a project-first portfolio (Tableau + DS).</span>
+              </div>
+              <div class="block b2">
+                <b>Strength</b>
+                <span>End-to-end: data → model/insight → story.</span>
+              </div>
+              <div class="block b3">
+                <b>Style</b>
+                <span>Simple dashboards, strong metrics, clean narrative.</span>
+              </div>
+              <div class="block b4">
+                <b>Languages</b>
+                <span>English (C1) • German (B2–C1)</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="card photoWrap" aria-label="Profile photo">
-        <div class="photoTop">
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+      <div class="sectionInner">
+        <div class="sectionTitle reveal">
+          <h2>Featured projects</h2>
+          <p class="hint">Sparse layout, case-study focus. Replace placeholders with your links + results.</p>
+        </div>
+
+        <div class="grid reveal" style="transition-delay:100ms">
+          <article class="proj">
+            <div class="inner">
+              <h3>Project 1 — Business KPI Dashboard</h3>
+              <p>Interactive Tableau dashboard to track KPIs, trends, segment performance, and drivers.</p>
+              <div class="tags">
+                <span class="tag">Tableau</span>
+                <span class="tag t2">Data prep</span>
+                <span class="tag t3">Dashboard design</span>
+              </div>
+              <div class="links">
+                <a href="PASTE_TABLEAU_LINK">Live dashboard</a>
+                <a href="PASTE_REPO_LINK">GitHub repo</a>
+                <a href="PASTE_WRITEUP_LINK">Case study</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="proj">
+            <div class="inner">
+              <h3>Project 2 — Cohort Retention & Churn</h3>
+              <p>Cohorts + retention curves with insights and recommendations.</p>
+              <div class="tags">
+                <span class="tag t2">SQL</span>
+                <span class="tag t3">Python</span>
+                <span class="tag t4">Analytics</span>
+              </div>
+              <div class="links">
+                <a href="PASTE_NOTEBOOK_OR_DASHBOARD">Notebook / Dashboard</a>
+                <a href="PASTE_REPO_LINK">GitHub repo</a>
+                <a href="PASTE_WRITEUP_LINK">Case study</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="proj">
+            <div class="inner">
+              <h3>Project 3 — Time Series Monitoring</h3>
+              <p>Operational monitoring with trends, anomalies, and performance KPIs.</p>
+              <div class="tags">
+                <span class="tag">Time series</span>
+                <span class="tag t2">KPIs</span>
+                <span class="tag t4">Visualization</span>
+              </div>
+              <div class="links">
+                <a href="PASTE_TABLEAU_LINK">Live dashboard</a>
+                <a href="PASTE_REPO_LINK">GitHub repo</a>
+                <a href="PASTE_WRITEUP_LINK">Case study</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="proj">
+            <div class="inner">
+              <h3>Project 4 — Applied ML Case Study</h3>
+              <p>End-to-end modeling: features → training → evaluation → explainability → takeaway.</p>
+              <div class="tags">
+                <span class="tag t3">Machine Learning</span>
+                <span class="tag t2">Evaluation</span>
+                <span class="tag t4">Explainability</span>
+              </div>
+              <div class="links">
+                <a href="PASTE_DEMO_LINK">Demo</a>
+                <a href="PASTE_REPO_LINK">GitHub repo</a>
+                <a href="PASTE_WRITEUP_LINK">Case study</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- DASHBOARDS -->
+    <section class="section" id="dashboards">
+      <div class="sectionInner">
+        <div class="sectionTitle reveal">
+          <h2>Dashboard gallery</h2>
+          <p class="hint">Paste Tableau Public embed code here (or just link out).</p>
+        </div>
+
+        <div class="panel reveal" style="transition-delay:120ms">
+          <h3 style="margin:0 0 8px;">Tableau Public embeds</h3>
+          <ul style="margin:0; padding-left:18px; color:var(--muted);">
+            <li>On Tableau Public: open your viz → Share → copy <b>Embed Code</b>.</li>
+            <li>Paste the embed snippet here (replace this panel contents).</li>
+          </ul>
+
+          <!-- Paste Tableau embed code here -->
+          <!--
+          <div style="margin-top:12px;">
+            ... Tableau embed snippet ...
+          </div>
+          -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="sectionInner">
+        <div class="sectionTitle reveal">
+          <h2>About</h2>
+          <p class="hint">Short and credible. Enough to support your projects.</p>
+        </div>
+
+        <div class="twoCol reveal" style="transition-delay:120ms">
+          <div class="panel">
+            <h3>How I work</h3>
+            <ul>
+              <li>Define success metrics and assumptions early.</li>
+              <li>Make data trustworthy (clean joins, tests/sanity checks, clear definitions).</li>
+              <li>Prefer simple baselines → then stronger models when they earn it.</li>
+              <li>Explain results clearly (story + tradeoffs + next steps).</li>
+            </ul>
+          </div>
+
+          <div class="panel">
+            <h3>What I’m looking for</h3>
+            <ul>
+              <li>Data Scientist (Applied) — modeling + evaluation + business context.</li>
+              <li>Data Analyst — metrics, dashboards, stakeholder storytelling.</li>
+              <li>Domains: industrial/energy analytics, time series, applied computer vision.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section" id="skills">
+      <div class="sectionInner">
+        <div class="sectionTitle reveal">
+          <h2>Skills</h2>
+          <p class="hint">Tools and methods I use regularly.</p>
+        </div>
+
+        <div class="twoCol reveal" style="transition-delay:120ms">
+          <div class="panel">
+            <h3>Analytics</h3>
+            <div class="chips">
+              <span class="chip">SQL</span>
+              <span class="chip">Python</span>
+              <span class="chip">EDA</span>
+              <span class="chip">Feature engineering</span>
+              <span class="chip">Visualization</span>
+              <span class="chip">Tableau</span>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Data Science</h3>
+            <div class="chips">
+              <span class="chip">scikit-learn</span>
+              <span class="chip">TensorFlow / Keras</span>
+              <span class="chip">PyTorch</span>
+              <span class="chip">Model evaluation</span>
+              <span class="chip">SHAP</span>
+              <span class="chip">Time series</span>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Data & Platforms</h3>
+            <div class="chips">
+              <span class="chip">BigQuery</span>
+              <span class="chip">Snowflake</span>
+              <span class="chip">ETL</span>
+              <span class="chip">Git</span>
+              <span class="chip">Linux</span>
+              <span class="chip">Excel</span>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Communication</h3>
+            <div class="chips">
+              <span class="chip">Storytelling</span>
+              <span class="chip">Documentation</span>
+              <span class="chip">Reproducibility</span>
+              <span class="chip">English (C1)</span>
+              <span class="chip">German (B2–C1)</span>
+            </div>
+          </div>
+        </div>
+
+        <footer class="reveal" style="transition-delay:180ms">
+          <div>© <span id="year"></span> Sakib Shaukat · Built with GitHub Pages</div>
           <div>
-            <div style="font-weight:650;">Profile</div>
-            <div class="mini">Data Scientist / Data Analyst</div>
+            <a class="pill" href="mailto:17shaukat@gmail.com">17shaukat@gmail.com</a>
+            <a class="pill" href="https://www.linkedin.com/in/sakib-shaukat/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a class="pill" href="https://github.com/sak-ib" target="_blank" rel="noreferrer">GitHub</a>
           </div>
-          <span class="pill" style="cursor:default;">Open to roles</span>
-        </div>
-
-        <div class="photo" aria-label="Sakib photo">
-          <img src="/assets/profile.jpg" alt="Photo of Sakib Shaukat" />
-        </div>
-      </div>
-    </div>
-
-    <!-- Projects -->
-    <section id="projects">
-      <div class="sectionTitle">
-        <h2>Featured projects</h2>
-        <p class="hint">4 case studies. Each should have: problem → approach → results → links.</p>
-      </div>
-
-      <div class="grid">
-        <article class="proj">
-          <div class="inner">
-            <h3>Project 1 — Business KPI Dashboard</h3>
-            <p>Interactive Tableau dashboard to track KPIs, trends, segment performance, and drivers. (Replace with your final story.)</p>
-            <div class="tags">
-              <span class="tag">Tableau</span>
-              <span class="tag t2">Data prep</span>
-              <span class="tag t3">Dashboard design</span>
-            </div>
-            <div class="links">
-              <a href="PASTE_TABLEAU_LINK">Live dashboard</a>
-              <a href="PASTE_REPO_LINK">GitHub repo</a>
-              <a href="PASTE_WRITEUP_LINK">Case study</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="proj">
-          <div class="inner">
-            <h3>Project 2 — Cohort Retention & Churn</h3>
-            <p>Cohort table + retention curves with insights and recommendations. (Replace with your dataset + key findings.)</p>
-            <div class="tags">
-              <span class="tag t2">SQL</span>
-              <span class="tag t3">Python</span>
-              <span class="tag t4">Analytics</span>
-            </div>
-            <div class="links">
-              <a href="PASTE_NOTEBOOK_OR_DASHBOARD">Notebook / Dashboard</a>
-              <a href="PASTE_REPO_LINK">GitHub repo</a>
-              <a href="PASTE_WRITEUP_LINK">Case study</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="proj">
-          <div class="inner">
-            <h3>Project 3 — Time Series Monitoring</h3>
-            <p>Operational monitoring with trends, anomalies, and performance KPIs. (Replace with your domain: energy/industrial/etc.)</p>
-            <div class="tags">
-              <span class="tag">Time series</span>
-              <span class="tag t2">KPIs</span>
-              <span class="tag t4">Visualization</span>
-            </div>
-            <div class="links">
-              <a href="PASTE_TABLEAU_LINK">Live dashboard</a>
-              <a href="PASTE_REPO_LINK">GitHub repo</a>
-              <a href="PASTE_WRITEUP_LINK">Case study</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="proj">
-          <div class="inner">
-            <h3>Project 4 — Applied ML Case Study</h3>
-            <p>End-to-end modeling: features → training → evaluation → explainability → practical takeaway. (Replace with your strongest ML work.)</p>
-            <div class="tags">
-              <span class="tag t3">Machine Learning</span>
-              <span class="tag t2">Evaluation</span>
-              <span class="tag t4">Explainability</span>
-            </div>
-            <div class="links">
-              <a href="PASTE_DEMO_LINK">Demo</a>
-              <a href="PASTE_REPO_LINK">GitHub repo</a>
-              <a href="PASTE_WRITEUP_LINK">Case study</a>
-            </div>
-          </div>
-        </article>
+        </footer>
       </div>
     </section>
-
-    <!-- Dashboards -->
-    <section id="dashboards">
-      <div class="sectionTitle">
-        <h2>Dashboard gallery</h2>
-        <p class="hint">Embed Tableau Public vizzes here (or link out if you prefer).</p>
-      </div>
-
-      <div class="panel">
-        <h3>Tableau Public embeds</h3>
-        <ul>
-          <li>On Tableau Public: open your viz → Share → copy <b>Embed Code</b>.</li>
-          <li>Paste the embed snippet below (replace this panel contents).</li>
-        </ul>
-
-        <!-- Paste Tableau embed code here -->
-        <!--
-        <div style="margin-top:12px;">
-          ... Tableau embed snippet ...
-        </div>
-        -->
-      </div>
-    </section>
-
-    <!-- About -->
-    <section id="about">
-      <div class="sectionTitle">
-        <h2>About</h2>
-        <p class="hint">Short, credible, and focused on how you work.</p>
-      </div>
-
-      <div class="twoCol">
-        <div class="panel">
-          <h3>What I do</h3>
-          <ul>
-            <li>Frame problems with clear metrics and assumptions.</li>
-            <li>Build reliable pipelines for analysis (SQL/Python) and reproducible notebooks.</li>
-            <li>Deliver results through dashboards + concise narratives, not just code.</li>
-          </ul>
-        </div>
-
-        <div class="panel">
-          <h3>What I’m looking for</h3>
-          <ul>
-            <li>Data Scientist (Applied) — modeling + evaluation + business context.</li>
-            <li>Data Analyst — metrics, experimentation, dashboards, stakeholder communication.</li>
-            <li>Domains: industrial/energy analytics, time series, applied computer vision.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Skills -->
-    <section id="skills">
-      <div class="sectionTitle">
-        <h2>Skills</h2>
-        <p class="hint">Tools and methods I use regularly.</p>
-      </div>
-
-      <div class="twoCol">
-        <div class="panel">
-          <h3>Analytics</h3>
-          <div class="chips">
-            <span class="chip">SQL</span>
-            <span class="chip">Python</span>
-            <span class="chip">EDA</span>
-            <span class="chip">Feature engineering</span>
-            <span class="chip">Visualization</span>
-            <span class="chip">Tableau</span>
-          </div>
-        </div>
-
-        <div class="panel">
-          <h3>Data Science</h3>
-          <div class="chips">
-            <span class="chip">scikit-learn</span>
-            <span class="chip">TensorFlow / Keras</span>
-            <span class="chip">PyTorch</span>
-            <span class="chip">Model evaluation</span>
-            <span class="chip">SHAP</span>
-            <span class="chip">Time series</span>
-          </div>
-        </div>
-
-        <div class="panel">
-          <h3>Data & Platforms</h3>
-          <div class="chips">
-            <span class="chip">BigQuery</span>
-            <span class="chip">Snowflake</span>
-            <span class="chip">ETL</span>
-            <span class="chip">Git</span>
-            <span class="chip">Linux</span>
-            <span class="chip">Excel</span>
-          </div>
-        </div>
-
-        <div class="panel">
-          <h3>Communication</h3>
-          <div class="chips">
-            <span class="chip">Storytelling</span>
-            <span class="chip">Documentation</span>
-            <span class="chip">Reproducibility</span>
-            <span class="chip">English (C1)</span>
-            <span class="chip">German (B2–C1)</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <div>© <span id="year"></span> Sakib Shaukat · Built with GitHub Pages</div>
-      <div>
-        <a class="pill" href="mailto:17shaukat@gmail.com">17shaukat@gmail.com</a>
-        <a class="pill" href="https://www.linkedin.com/in/sakib-shaukat/" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a class="pill" href="https://github.com/sak-ib" target="_blank" rel="noreferrer">GitHub</a>
-      </div>
-    </footer>
   </div>
 
   <script>
+    // Year
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Theme toggle (moon icon kept)
+    (function(){
+      const saved = localStorage.getItem("theme");
+      if (saved) document.documentElement.setAttribute("data-theme", saved);
+      document.getElementById("themeBtn").addEventListener("click", function(){
+        const cur = document.documentElement.getAttribute("data-theme") || "light";
+        const next = (cur === "dark") ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", next);
+        localStorage.setItem("theme", next);
+      });
+    })();
+
+    // Scroll reveal (IntersectionObserver)
+    (function(){
+      const els = document.querySelectorAll(".reveal");
+      const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduceMotion) { els.forEach(el => el.classList.add("in")); return; }
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) e.target.classList.add("in");
+        });
+      }, { threshold: 0.12 });
+
+      els.forEach(el => io.observe(el));
+    })();
   </script>
 </body>
 </html>
