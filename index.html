@@ -179,6 +179,7 @@
       transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease), background var(--dur) var(--ease);
       cursor:pointer;
     }
+    html[data-theme="dark"] .btn{ color: #fff; }
     .btn:hover{
       text-decoration:none;
       border-color: rgba(41,91,255,0.35);
@@ -186,7 +187,6 @@
       transform: translateY(-1px);
     }
     html[data-theme="dark"] .btn:hover{ border-color: rgba(122,162,255,0.45); }
-    html[data-theme="dark"] .btn svg{ stroke: currentColor;}
 
     .btnPrimary{
       border-color: transparent;
