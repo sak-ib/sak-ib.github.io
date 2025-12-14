@@ -11,35 +11,31 @@
   <meta property="og:title" content="Sakib Shaukat — Data Scientist / Data Analyst" />
   <meta property="og:description" content="Analytics case studies, Tableau dashboards, and applied ML projects." />
   <meta property="og:type" content="website" />
-  <!-- Optional: add an image at assets/og.png and uncomment the next line (update URL to your Pages site) -->
   <!-- <meta property="og:image" content="https://sak-ib.github.io/assets/og.png" /> -->
 
   <style>
     :root{
-      --bg: #0b1220;
-      --bg2:#0b1220;
-      --card:#0f1b33;
-      --text:#eaf0ff;
-      --muted:#b6c2e0;
-      --line: rgba(255,255,255,0.10);
-      --accent:#7aa2ff;
-      --accent2:#9be3ff;
-      --shadow: 0 18px 40px rgba(0,0,0,0.35);
+      /* Light theme only */
+      --bg0:#f7f9ff;
+      --bg1:#ffffff;
+
+      --text:#0b1020;
+      --muted:#4a5874;
+      --line: rgba(11,16,32,0.10);
+
+      --card:#ffffff;
+      --card2:#fbfcff;
+
+      --accent:#295bff;
+      --accent2:#0ea5e9;
+      --accent3:#8b5cf6;
+
+      --shadow: 0 18px 50px rgba(11,16,32,0.10);
+      --shadow2: 0 10px 30px rgba(11,16,32,0.08);
+
       --radius: 18px;
       --radius2: 26px;
       --max: 1120px;
-    }
-
-    [data-theme="light"]{
-      --bg: #ffffff;
-      --bg2: #f6f8ff;
-      --card:#ffffff;
-      --text:#0b1020;
-      --muted:#44506a;
-      --line: rgba(11,16,32,0.10);
-      --accent:#295bff;
-      --accent2:#0ea5e9;
-      --shadow: 0 16px 36px rgba(11,16,32,0.10);
     }
 
     *{ box-sizing:border-box; }
@@ -49,9 +45,10 @@
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
       color:var(--text);
       background:
-        radial-gradient(1200px 600px at 18% -10%, rgba(122,162,255,0.30), transparent 55%),
-        radial-gradient(900px 520px at 90% 0%, rgba(155,227,255,0.22), transparent 50%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
+        radial-gradient(900px 520px at 15% -10%, rgba(41,91,255,0.14), transparent 55%),
+        radial-gradient(900px 520px at 85% 0%, rgba(14,165,233,0.12), transparent 55%),
+        radial-gradient(900px 520px at 70% 90%, rgba(139,92,246,0.10), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
       line-height:1.55;
     }
 
@@ -59,6 +56,7 @@
     a:hover{ text-decoration:underline; }
 
     .wrap{ max-width:var(--max); margin:0 auto; padding: 26px 18px 70px; }
+
     .skip{
       position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden;
     }
@@ -72,45 +70,67 @@
       display:flex; align-items:center; justify-content:space-between;
       gap:12px; padding: 10px 12px;
       border:1px solid var(--line); border-radius: var(--radius2);
-      background: rgba(255,255,255,0.02);
+      background: rgba(255,255,255,0.78);
       backdrop-filter: blur(10px);
+      box-shadow: var(--shadow2);
     }
-    [data-theme="light"] .topbar{ background: rgba(255,255,255,0.70); }
+
     .brand{ display:flex; align-items:center; gap:10px; min-width:240px; }
     .dot{
-      width:10px; height:10px; border-radius:999px;
+      width:11px; height:11px; border-radius:999px;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: 0 0 0 4px rgba(122,162,255,0.15);
+      box-shadow: 0 0 0 6px rgba(41,91,255,0.10);
     }
     .brand strong{ letter-spacing: -0.2px; }
+    .brand small{ color:var(--muted); font-size:13px; }
+
     .nav{
       display:flex; gap:10px; flex-wrap:wrap; justify-content:center;
     }
     .pill{
-      padding:8px 10px; border:1px solid var(--line); border-radius:999px;
-      background: rgba(255,255,255,0.03);
-      font-size:14px; color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background: rgba(11,16,32,0.02);
+      font-size:14px;
+      color:var(--muted);
+      transition: transform .12s ease, border-color .12s ease, background .12s ease, color .12s ease;
     }
-    [data-theme="light"] .pill{ background: rgba(11,16,32,0.03); }
-    .pill:hover{ text-decoration:none; border-color: rgba(122,162,255,0.45); color: var(--text); }
+    .pill:hover{
+      text-decoration:none;
+      border-color: rgba(41,91,255,0.35);
+      background: rgba(41,91,255,0.06);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
 
     .actions{ display:flex; gap:10px; align-items:center; justify-content:flex-end; }
     .btn{
       display:inline-flex; align-items:center; gap:8px;
-      padding:9px 12px; border-radius: 14px;
+      padding:9px 12px;
+      border-radius: 14px;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,0.03);
+      background: rgba(11,16,32,0.02);
       font-size:14px;
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
     }
-    [data-theme="light"] .btn{ background: rgba(11,16,32,0.03); }
-    .btn:hover{ text-decoration:none; border-color: rgba(122,162,255,0.55); }
+    .btn:hover{
+      text-decoration:none;
+      border-color: rgba(41,91,255,0.35);
+      background: rgba(41,91,255,0.06);
+      transform: translateY(-1px);
+    }
     .btnPrimary{
       border-color: transparent;
-      background: linear-gradient(135deg, rgba(122,162,255,0.95), rgba(155,227,255,0.75));
-      color: #0b1220;
+      background: linear-gradient(135deg, rgba(41,91,255,0.95), rgba(14,165,233,0.85));
+      color: #ffffff;
       font-weight: 650;
+      box-shadow: 0 14px 30px rgba(41,91,255,0.18);
     }
-    [data-theme="light"] .btnPrimary{ color:#061022; }
+    .btnPrimary:hover{
+      background: linear-gradient(135deg, rgba(41,91,255,1), rgba(139,92,246,0.90));
+      transform: translateY(-1px);
+    }
     .icon{ width:16px; height:16px; display:inline-block; }
 
     /* Hero */
@@ -129,14 +149,11 @@
     .card{
       border:1px solid var(--line);
       border-radius: var(--radius2);
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      background: linear-gradient(180deg, var(--card), var(--card2));
       box-shadow: var(--shadow);
       overflow:hidden;
     }
-    [data-theme="light"] .card{
-      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.86));
-    }
-    .cardInner{ padding: 20px; }
+    .cardInner{ padding: 22px; }
 
     h1{
       margin: 0 0 10px;
@@ -148,19 +165,21 @@
       margin:0;
       color: var(--muted);
       font-size: 16px;
-      max-width: 70ch;
+      max-width: 72ch;
     }
+
     .badges{ display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
     .badge{
       display:inline-flex; align-items:center; gap:8px;
-      padding:7px 10px; border-radius: 999px;
+      padding:7px 10px;
+      border-radius: 999px;
       border:1px solid var(--line);
-      background: rgba(255,255,255,0.03);
+      background: rgba(255,255,255,0.85);
       color: var(--muted);
       font-size: 14px;
     }
-    [data-theme="light"] .badge{ background: rgba(11,16,32,0.03); }
     .badge b{ color: var(--text); font-weight:650; }
+
     .cta{ display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; }
 
     /* Photo */
@@ -174,24 +193,15 @@
       margin: 14px auto 18px;
       width: 220px; height: 220px;
       border-radius: 999px;
-      border: 1px solid var(--line);
+      border: 1px solid rgba(41,91,255,0.20);
       overflow:hidden;
-      background: rgba(255,255,255,0.04);
-      box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+      background: rgba(41,91,255,0.05);
+      box-shadow: 0 18px 40px rgba(11,16,32,0.14);
     }
     .photo img{ width:100%; height:100%; object-fit:cover; display:block; }
-    .photoNote{
-      padding: 0 18px 18px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .photoNote code{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 12px;
-    }
 
     /* Sections */
-    section{ margin-top: 28px; }
+    section{ margin-top: 30px; }
     .sectionTitle{
       display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap;
       margin: 0 0 12px;
@@ -210,30 +220,51 @@
     .proj{
       border:1px solid var(--line);
       border-radius: var(--radius2);
-      background: rgba(255,255,255,0.02);
+      background: rgba(255,255,255,0.85);
+      box-shadow: var(--shadow2);
       overflow:hidden;
+      transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease;
     }
-    [data-theme="light"] .proj{ background: rgba(11,16,32,0.02); }
+    .proj:hover{
+      transform: translateY(-2px);
+      border-color: rgba(41,91,255,0.26);
+      box-shadow: 0 18px 44px rgba(11,16,32,0.12);
+    }
     .proj .inner{ padding: 16px; }
     .proj h3{ margin:0 0 6px; font-size: 17px; letter-spacing:-0.2px; }
     .proj p{ margin:0; color: var(--muted); font-size:14px; }
 
     .tags{ display:flex; gap:8px; flex-wrap:wrap; margin-top: 12px; }
+
+    /* Colorful tags (subtle) */
     .tag{
-      padding: 6px 10px; border-radius: 999px;
+      padding: 6px 10px;
+      border-radius: 999px;
       border:1px solid var(--line);
-      color: var(--muted);
       font-size: 13px;
-      background: rgba(255,255,255,0.02);
+      color: #1f2a44;
+      background: rgba(41,91,255,0.07);
     }
+    .tag.t2{ background: rgba(14,165,233,0.10); }
+    .tag.t3{ background: rgba(139,92,246,0.10); }
+    .tag.t4{ background: rgba(16,185,129,0.10); }
 
     .links{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 12px; }
     .links a{
-      padding:8px 10px; border-radius: 12px; border: 1px solid var(--line);
-      font-size: 13px; color: var(--text);
-      background: rgba(255,255,255,0.02);
+      padding:8px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(41,91,255,0.18);
+      font-size: 13px;
+      color: #12307a;
+      background: rgba(41,91,255,0.06);
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
     }
-    .links a:hover{ text-decoration:none; border-color: rgba(122,162,255,0.55); }
+    .links a:hover{
+      text-decoration:none;
+      border-color: rgba(41,91,255,0.35);
+      background: rgba(41,91,255,0.10);
+      transform: translateY(-1px);
+    }
 
     /* Two-column panels */
     .twoCol{
@@ -246,10 +277,10 @@
     .panel{
       border:1px solid var(--line);
       border-radius: var(--radius2);
-      background: rgba(255,255,255,0.02);
+      background: rgba(255,255,255,0.85);
+      box-shadow: var(--shadow2);
       padding: 16px;
     }
-    [data-theme="light"] .panel{ background: rgba(11,16,32,0.02); }
     .panel h3{ margin:0 0 8px; font-size: 16px; }
     .panel ul{ margin:0; padding-left: 18px; color: var(--muted); }
     .panel li{ margin:8px 0; }
@@ -257,12 +288,13 @@
     /* Skills chips */
     .chips{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px; }
     .chip{
-      padding: 7px 10px; border-radius: 999px;
+      padding: 7px 10px;
+      border-radius: 999px;
       border:1px solid var(--line);
-      font-size: 13px; color: var(--muted);
-      background: rgba(255,255,255,0.02);
+      font-size: 13px;
+      color: var(--muted);
+      background: rgba(11,16,32,0.02);
     }
-    [data-theme="light"] .chip{ background: rgba(11,16,32,0.02); }
 
     footer{
       margin-top: 34px;
@@ -272,16 +304,12 @@
       display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between;
       font-size: 14px;
     }
-  </style>
 
-  <script>
-    (function(){
-      const saved = localStorage.getItem("theme");
-      const prefersLight = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
-      const theme = saved || (prefersLight ? "light" : "dark");
-      document.documentElement.setAttribute("data-theme", theme);
-    })();
-  </script>
+    @media (prefers-reduced-motion: reduce){
+      html{ scroll-behavior:auto; }
+      .pill, .btn, .proj, .links a{ transition:none; }
+    }
+  </style>
 
   <script type="application/ld+json">
   {
@@ -310,7 +338,7 @@
         <span class="dot" aria-hidden="true"></span>
         <div>
           <strong>Sakib Shaukat</strong><br />
-          <span style="color:var(--muted); font-size:13px;">Data Scientist / Data Analyst • SQL • Python • Tableau</span>
+          <small>Data Scientist / Data Analyst • SQL • Python • Tableau</small>
         </div>
       </div>
 
@@ -322,15 +350,6 @@
       </div>
 
       <div class="actions">
-        <button class="btn" id="themeBtn" type="button" aria-label="Toggle theme">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z" stroke="currentColor" stroke-width="1.8"/>
-            <path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l1.4 1.4M17.6 17.6 19 19M19 5l-1.4 1.4M5 19l1.4-1.4"
-                  stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-          Theme
-        </button>
-
         <a class="btn" href="resume.pdf">Resume</a>
         <a class="btn btnPrimary" href="#projects" aria-label="Jump to projects">View work</a>
       </div>
@@ -343,7 +362,7 @@
           <h1>Portfolio</h1>
           <p class="subtitle">
             I build data products end-to-end: <b>clean data (SQL/Python)</b> → <b>analysis & modeling</b> →
-            <b>clear dashboards and case studies</b>. My work focuses on turning messy data into decisions.
+            <b>dashboards and case studies</b>. I focus on turning messy data into decisions.
           </p>
 
           <div class="badges" aria-label="Highlights">
@@ -353,7 +372,7 @@
           </div>
 
           <div class="cta">
-            <a class="btn btnPrimary" href="mailto:17shaukat@gmail.com">
+            <a class="btn btnPrimary" href="mailto:17shaukat@gmail.com" aria-label="Email Sakib">
               <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="1.8"/>
                 <path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -379,7 +398,6 @@
         <div class="photo" aria-label="Sakib photo">
           <img src="/assets/profile.jpg" alt="Photo of Sakib Shaukat" />
         </div>
-
       </div>
     </div>
 
@@ -391,15 +409,14 @@
       </div>
 
       <div class="grid">
-        <!-- Project 1 -->
         <article class="proj">
           <div class="inner">
             <h3>Project 1 — Business KPI Dashboard</h3>
             <p>Interactive Tableau dashboard to track KPIs, trends, segment performance, and drivers. (Replace with your final story.)</p>
             <div class="tags">
               <span class="tag">Tableau</span>
-              <span class="tag">Data prep</span>
-              <span class="tag">Dashboard design</span>
+              <span class="tag t2">Data prep</span>
+              <span class="tag t3">Dashboard design</span>
             </div>
             <div class="links">
               <a href="PASTE_TABLEAU_LINK">Live dashboard</a>
@@ -409,15 +426,14 @@
           </div>
         </article>
 
-        <!-- Project 2 -->
         <article class="proj">
           <div class="inner">
             <h3>Project 2 — Cohort Retention & Churn</h3>
             <p>Cohort table + retention curves with insights and recommendations. (Replace with your dataset + key findings.)</p>
             <div class="tags">
-              <span class="tag">SQL</span>
-              <span class="tag">Python</span>
-              <span class="tag">Analytics</span>
+              <span class="tag t2">SQL</span>
+              <span class="tag t3">Python</span>
+              <span class="tag t4">Analytics</span>
             </div>
             <div class="links">
               <a href="PASTE_NOTEBOOK_OR_DASHBOARD">Notebook / Dashboard</a>
@@ -427,15 +443,14 @@
           </div>
         </article>
 
-        <!-- Project 3 -->
         <article class="proj">
           <div class="inner">
             <h3>Project 3 — Time Series Monitoring</h3>
             <p>Operational monitoring with trends, anomalies, and performance KPIs. (Replace with your domain: energy/industrial/etc.)</p>
             <div class="tags">
               <span class="tag">Time series</span>
-              <span class="tag">KPIs</span>
-              <span class="tag">Visualization</span>
+              <span class="tag t2">KPIs</span>
+              <span class="tag t4">Visualization</span>
             </div>
             <div class="links">
               <a href="PASTE_TABLEAU_LINK">Live dashboard</a>
@@ -445,15 +460,14 @@
           </div>
         </article>
 
-        <!-- Project 4 -->
         <article class="proj">
           <div class="inner">
             <h3>Project 4 — Applied ML Case Study</h3>
             <p>End-to-end modeling: features → training → evaluation → explainability → practical takeaway. (Replace with your strongest ML work.)</p>
             <div class="tags">
-              <span class="tag">Machine Learning</span>
-              <span class="tag">Evaluation</span>
-              <span class="tag">Explainability</span>
+              <span class="tag t3">Machine Learning</span>
+              <span class="tag t2">Evaluation</span>
+              <span class="tag t4">Explainability</span>
             </div>
             <div class="links">
               <a href="PASTE_DEMO_LINK">Demo</a>
@@ -532,7 +546,7 @@
             <span class="chip">EDA</span>
             <span class="chip">Feature engineering</span>
             <span class="chip">Visualization</span>
-            <span class="chip">Dashboarding (Tableau)</span>
+            <span class="chip">Tableau</span>
           </div>
         </div>
 
@@ -543,7 +557,7 @@
             <span class="chip">TensorFlow / Keras</span>
             <span class="chip">PyTorch</span>
             <span class="chip">Model evaluation</span>
-            <span class="chip">Explainability (SHAP)</span>
+            <span class="chip">SHAP</span>
             <span class="chip">Time series</span>
           </div>
         </div>
@@ -563,9 +577,9 @@
         <div class="panel">
           <h3>Communication</h3>
           <div class="chips">
-            <span class="chip">Stakeholder-friendly storytelling</span>
-            <span class="chip">Clear documentation</span>
-            <span class="chip">Reproducible workflows</span>
+            <span class="chip">Storytelling</span>
+            <span class="chip">Documentation</span>
+            <span class="chip">Reproducibility</span>
             <span class="chip">English (C1)</span>
             <span class="chip">German (B2–C1)</span>
           </div>
@@ -585,13 +599,6 @@
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
-
-    document.getElementById("themeBtn").addEventListener("click", function(){
-      const cur = document.documentElement.getAttribute("data-theme") || "dark";
-      const next = cur === "dark" ? "light" : "dark";
-      document.documentElement.setAttribute("data-theme", next);
-      localStorage.setItem("theme", next);
-    });
   </script>
 </body>
 </html>
